@@ -12,7 +12,8 @@
   <body>
 
       <% if user_signed_in? %>
-      <p>Hello, <%= current_user.name %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
+      <p>Hello, <%= link_to "#{current_user.name}" %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>      
+      <%= link_to "Dashboard", dashboard_path %>
       <br>
 
       <% end %>

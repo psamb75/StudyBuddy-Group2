@@ -11,13 +11,13 @@
         <% @my_courses.each do |c| %>
             <% x = Course.find(c.course_id) %>
             <tr>
-                <td><%= x.course_name %></td> <!-- Link to course page -->
+                <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
                 <td><%= x.course_code %></td>
             </tr>
         <% end %>
     </tbody>
 </table>
-<%= link_to 'Join a course', dashboard_path %>
+<%= link_to 'Join a course', courses_path %>
 
 <p><b>Your tutoring plans:</b></p>
 

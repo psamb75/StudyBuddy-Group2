@@ -1,0 +1,25 @@
+<h1>Listing Courses</h1>
+ 
+<table>
+  <tr>
+    <th>Course Code</th>
+    <th>Course Name</th>
+    <th></th>
+  </tr>
+ 
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.course_code %></td>
+      <td><%= link_to "#{course.course_name}", course_path(course) %></td>
+      <td>
+        <%= check_box_tag name = "course_ids[]", id = course.id, checked = false %>
+      </td>
+      <td>
+        <%= button_to "Add", { :action => "add", :course_id => course.id}, :method => :post %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= button_to "Add", { :action => "add" }, :method => :post %>
+<%= button_to "Create a new course", { :action => "new" }, :method => :get %>

@@ -1,0 +1,18 @@
+<p>
+  <strong>Course Code:</strong>
+  <%= @course.course_code %>
+</p>
+ 
+<p>
+  <strong>Course Name:</strong>
+  <%= @course.course_name %>
+</p>
+
+<div>
+  <%= link_to 'Notes', courses_path %>
+<div>
+  <%= link_to 'Tutoring', courses_path %>
+</div>
+<div>
+  <%= link_to 'Study Groups', courses_path %>
+</div>
