@@ -1,0 +1,40 @@
+<h1>Dashboard</h1>
+<p>Greetings, <%= @me.first_name %></p> <!-- Link to user profile -->
+<p><b>Your courses:</b></p>
+<table style="border:1px solid black;">
+    <thead>
+        <th>Course Name</th>
+        <th>Course code</th>
+    </thead>
+    <tbody>
+    <!-- for each enrolled course, display details -->
+        <% @my_courses.each do |c| %>
+            <% x = Course.find(c.course_id) %>
+            <tr>
+                <td><%= x.course_name %></td> <!-- Link to course page -->
+                <td><%= x.course_code %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<p><b>Your tutoring plans:</b></p>
+
+<p><b>Your upcoming Events:</b></p>
+<table style="border:1px solid black;">
+    <thead>
+        <th>Event name</th> 
+        <th>Location</th>
+        <th>Event description</th>
+    </thead>
+    <tbody>
+    <!-- for each attending events, display details -->
+        <% @my_study.each do |s| %>
+            <% y = StudyGroup.find(s.study_group_id) %>
+            <tr>
+                <td><%= y.event_name %></td> <!-- Link to event page-->
+                <td><%= y.location %></td>
+                <td><%= y.description %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
