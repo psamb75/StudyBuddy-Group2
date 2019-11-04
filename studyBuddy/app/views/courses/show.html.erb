@@ -14,5 +14,5 @@
   <%= link_to 'Tutoring', courses_path %>
 </div>
 <div>
-  <%= link_to 'Study Groups', courses_path %>
+  <%= link_to 'Study Groups', :action=>"index", :controller=>"study_groups", :course_id => @course.id %>
 </div>

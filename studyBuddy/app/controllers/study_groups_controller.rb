@@ -1,10 +1,12 @@
 class StudyGroupsController < ApplicationController
   def index
-    @study_groups = StudyGroup.all
+    course = Course.find(params[:course_id])
+    @study_groups = course.study_groups
   end
 
   def show
     @study_group = StudyGroup.find(params[:id])
+    @attendees = @study_group.attendees
   end
 
   def new
@@ -28,6 +30,16 @@ class StudyGroupsController < ApplicationController
       redirect_to course_study_groups_path
     end
 
+  end
+
+  def attend
+    course_id = params[:course_id]
+    study_group_id = params[:study_group_id]
+    study_group = StudyGroup.find(study_group_id)
+    @attendee = Attendee.new(event_name: study_group.event_name, user_name: current_user.name, user_id: current_user.id, study_group_id:study_group_id)
+
+    @attendee.save
+    redirect_to :action => "show", :id => study_group_id
   end
 
   private

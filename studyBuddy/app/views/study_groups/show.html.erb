@@ -4,6 +4,15 @@
 </p>
 
 <p>
+  <strong>Attendees:</strong>
+  <% @attendees.each do |user| %>
+    <li>
+      <%= user.user_name %>
+    </li>
+  <% end %>
+</p>
+
+<p>
   <strong>Date:</strong>
   <%= @study_group.time %>
 </p>
@@ -18,4 +27,5 @@
   <%= @study_group.description %>
 </p>
 
+<%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post %>
 <%= button_to "Return to all study groups", { :action => "index" }, :method => :get %>

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get "/dashboard" => "dashboard#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :courses do
-    resources :study_groups
+    resources :study_groups do
+      collection do
+        post 'attend'
+      end
+    end
     collection do
       post 'add'
     end
