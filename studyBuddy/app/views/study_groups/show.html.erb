@@ -1,0 +1,21 @@
+<p>
+  <strong>Event Name:</strong>
+  <%= @study_group.event_name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @study_group.time %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @study_group.location %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @study_group.description %>
+</p>
+
+<%= button_to "Return to all study groups", { :action => "index" }, :method => :get %>

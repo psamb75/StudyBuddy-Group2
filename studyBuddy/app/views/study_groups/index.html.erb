@@ -1,0 +1,23 @@
+<h1>Listing study groups</h1>
+
+<table>
+  <tr>
+    <th>Event Name</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+
+  <% @study_groups.each do |study_group| %>
+    <tr>
+      <td><%= study_group.event_name %></td>
+      <td><%= study_group.time %></td>
+      <td><%= study_group.location %></td>
+      <td><%= study_group.description %></td>
+      <td><%= link_to 'Show', controller: "study_groups", action: "show", id: study_group %></td>
+    </tr>
+  <% end %>
+
+  <%= button_to "Create a new study group", { :action => "new" }, :method => :get %>
+</table>

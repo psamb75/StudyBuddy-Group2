@@ -1,0 +1,27 @@
+<h1>New Study Group</h1>
+
+<%= form_with scope: :study_group, url: course_study_groups_path, local: true do |form| %>
+  <p>
+    <%= form.label :event_name%><br>
+    <%= form.text_field :event_name %>
+  </p>
+
+  <p>
+    <%= form.label :time %><br>
+    <%= form.text_area :time %>
+  </p>
+
+  <p>
+    <%= form.label :location %><br>
+    <%= form.text_area :location %>
+  </p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
