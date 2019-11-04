@@ -1,5 +1,5 @@
 <h1>Dashboard</h1>
-<p>Greetings, <%= @me.first_name %></p> <!-- Link to user profile -->
+<p>Greetings, <%= link_to @me.first_name , user_path(@me.name)%></p>
 <p><b>Your courses:</b></p>
 <table style="border:1px solid black;">
     <thead>
