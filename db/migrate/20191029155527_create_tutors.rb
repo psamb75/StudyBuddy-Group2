@@ -1,7 +1,7 @@
 class CreateTutors < ActiveRecord::Migration[6.0]
   def change
     create_table :tutors do |t|
-      t.string :name
+      t.string :user_name
       t.string :course_code
       t.text :description
       t.float :rate

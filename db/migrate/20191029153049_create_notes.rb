@@ -4,7 +4,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.string :course_code
       t.string :title
       t.string :tag
-      t.string :name
+      t.string :user_name
       t.string :timeline
       t.string :location
       t.references :course, null: false, foreign_key: true

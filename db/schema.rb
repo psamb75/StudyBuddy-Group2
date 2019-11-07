@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_193001) do
+ActiveRecord::Schema.define(version: 2019_11_03_005705) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "attendees", force: :cascade do |t|
     t.string "event_name"
     t.string "user_name"
-    t.integer "user_id", null: false
-    t.integer "study_group_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "study_group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["study_group_id"], name: "index_attendees_on_study_group_id"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_193001) do
   create_table "enrolments", force: :cascade do |t|
     t.string "user_name"
     t.string "course_name"
-    t.integer "user_id", null: false
-    t.integer "course_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_enrolments_on_course_id"
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_193001) do
     t.string "user_name"
     t.string "timeline"
     t.string "location"
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_notes_on_course_id"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_193001) do
     t.string "time"
     t.string "description"
     t.string "course_code"
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_study_groups_on_course_id"
@@ -72,8 +75,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_193001) do
     t.string "course_code"
     t.text "description"
     t.float "rate"
-    t.integer "user_id", null: false
-    t.integer "course_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_tutors_on_course_id"
@@ -81,7 +84,6 @@ ActiveRecord::Schema.define(version: 2019_11_03_193001) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_name"
     t.string "email", default: "", null: false
     t.string "password"
     t.text "description"
