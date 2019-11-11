@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_005705) do
+ActiveRecord::Schema.define(version: 2019_11_11_213408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 2019_11_03_005705) do
     t.index ["course_id"], name: "index_study_groups_on_course_id"
   end
 
+  create_table "tutoring_sessions", force: :cascade do |t|
+    t.string "tutor_name"
+    t.string "student_name"
+    t.string "course_code"
+    t.bigint "user_id", null: false
+    t.bigint "tutor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
+    t.index ["user_id"], name: "index_tutoring_sessions_on_user_id"
+  end
+
   create_table "tutors", force: :cascade do |t|
     t.string "user_name"
     t.string "course_code"
@@ -107,6 +119,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_005705) do
   add_foreign_key "enrolments", "users"
   add_foreign_key "notes", "courses"
   add_foreign_key "study_groups", "courses"
+  add_foreign_key "tutoring_sessions", "tutors"
+  add_foreign_key "tutoring_sessions", "users"
   add_foreign_key "tutors", "courses"
   add_foreign_key "tutors", "users"
 end

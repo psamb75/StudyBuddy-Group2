@@ -1,0 +1,17 @@
+<p>
+  <strong>Tutor:</strong>
+  <%= @tutor.user_name %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @tutor.rate %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tutor.description %>
+</p>
+
+<%= button_to "Hire", {:action => "hire", :tutor_id => @tutor.id}, :method => :post %>
+<%= button_to "Return to all tutors", { :action => "index" }, :method => :get %>

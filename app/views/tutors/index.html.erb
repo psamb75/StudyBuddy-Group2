@@ -1,0 +1,21 @@
+<h1>Listing Tutors</h1>
+
+<table>
+  <tr>
+    <th>Tutor</th>
+    <th>Rate</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+
+  <% @tutors.each do |tutor| %>
+    <tr>
+      <td><%= link_to "#{tutor.user_name}", controller: "users", action: "show", id: tutor.user_id %></td>
+      <td><%= tutor.rate %></td>
+      <td><%= tutor.description %></td>
+      <td><%= link_to 'Show', controller: "tutors", action: "show", id: tutor %></td>
+    </tr>
+  <% end %>
+
+  <%= button_to "Create a new study group", { :action => "new" }, :method => :get %>
+</table>

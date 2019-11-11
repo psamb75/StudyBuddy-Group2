@@ -11,6 +11,11 @@ Rails.application.routes.draw do
         post 'attend'
       end
     end
+    resources :tutors do
+      collection do
+        post 'hire'
+      end
+    end
     collection do
       post 'add'
     end
