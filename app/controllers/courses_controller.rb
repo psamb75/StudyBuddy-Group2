@@ -27,6 +27,14 @@ class CoursesController < ApplicationController
         redirect_to dashboard_path
     end
 
+    def destroy
+        course_id = params[:id]
+        enrolment = Enrolment.find_by(user_id: current_user.id, course_id: course_id)
+        enrolment.destroy
+
+        redirect_to dashboard_path
+    end
+
     private
         def course_params
             params.require(:course).permit(:course_code, :course_name)

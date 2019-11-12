@@ -5,6 +5,7 @@
     <thead>
         <th>Course Name</th>
         <th>Course code</th>
+        <th></th>
     </thead>
     <tbody>
     <!-- for each enrolled course, display details -->
@@ -13,6 +14,7 @@
             <tr>
                 <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
                 <td><%= x.course_code %></td>
+                <td><%= link_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
             </tr>
         <% end %>
     </tbody>
