@@ -19,7 +19,7 @@ class TutorsController < ApplicationController
         @tutor = Tutor.new(tutors_params_tmp)
         @tutor.save
 
-        redirect_to :action => "show", :id => params[:id]
+        redirect_to :action => "show", :id => @tutor
     end
 
     def hire

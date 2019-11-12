@@ -27,5 +27,7 @@
   <%= @study_group.description %>
 </p>
 
-<%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post %>
+<% if (!Attendee.exists?(user_name: current_user.name)) %>
+  <%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post %>
+<% end %>
 <%= button_to "Return to all study groups", { :action => "index" }, :method => :get %>
