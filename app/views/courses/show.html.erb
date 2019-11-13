@@ -9,7 +9,7 @@
 </p>
 
 <div>
-  <%= link_to 'Notes', courses_path %>
+  <%= link_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id } %>
 <div>
   <%= link_to 'Tutoring', :action=>"index", :controller=>"tutors", :course_id => @course.id %>
 </div>

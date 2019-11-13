@@ -1,0 +1,28 @@
+<p>
+  <strong>Title:</strong>
+  <%= @note.title %>
+</p>
+ 
+<p>
+  <strong>Tag</strong>
+  <%= @note.tag %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= link_to 'Note', @note.location %>
+</p>
+
+<p>
+  <strong>Uploaded:</strong>
+  <%= @note.timeline %>
+</p>
+
+<p>
+  <strong>Uploaded By</strong>
+  <%= @note.user_name %>
+</p>
+
+<div>
+  <%= link_to 'Notes', {:controller => "notes", :action => "index" } %>
+<div>

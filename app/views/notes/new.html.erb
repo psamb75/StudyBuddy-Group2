@@ -1,0 +1,22 @@
+<%= form_with scope: :note, url: course_notes_path, local: true do |form| %>
+    <h1>Add a new note to <%= @course.course_code %> </h1>
+    <p>
+        <%= form.label :Title %><br>
+        <%= form.text_field :title %>
+    </p>
+ 
+    <p>
+      <%= form.label :file %><br>
+      <%= form.text_field :location %>
+    </p>
+ 
+   
+    <%= form.radio_button :tag, "personal" %> <%= form.label :Personal %>
+    <%= form.radio_button :tag, "External Resource" %><%= form.label :'External Resource' %>  
+    <%= form.radio_button :tag, "Past Test/Exam" %><%= form.label :'Past Test/Exam' %>
+
+    <p>
+        <%= form.submit %>
+    </p>
+
+<% end %>

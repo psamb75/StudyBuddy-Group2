@@ -1,0 +1,22 @@
+<h1>
+    Notes for <%= @course.course_name %> - <%= @course.course_code %>
+</h1>
+
+<table>
+  <tr>
+    <th>Note title</th>
+    <th>Course</th>
+    <th>Tag</th>
+    <th>Access</th>
+  </tr>
+
+  <% @notes.each do |note| %>
+    <tr>
+      <td><%= note.title %></td>
+      <td><%= @course.course_code %></td>
+      <td><%= note.tag %></td>
+      <td><%= link_to 'Show', controller: "notes", action: "show", id: note %></td>
+    </tr>
+  <% end %>
+
+<%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id } %>

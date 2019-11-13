@@ -16,12 +16,18 @@ Rails.application.routes.draw do
         post 'hire'
       end
     end
+    resources :notes do
+      collection do
+        post 'add'
+      end
+    end
     collection do
       post 'add'
     end
   end
   
   resources :users
+
 
   get 'study_groups/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
