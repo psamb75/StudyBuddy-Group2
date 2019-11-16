@@ -10,7 +10,10 @@
 
 <p>
   <strong>Note:</strong>
-  <%= link_to 'Note', @note.location %>
+  <% if @note.file.attached? %>
+    <iframe src="<%=(url_for(@note.file))%>" width="800" height="680" style="border: none;"> </iframe>
+    <!-- <img src="<%=(url_for(@note.file))%>"> -->
+  <% end %>
 </p>
 
 <p>

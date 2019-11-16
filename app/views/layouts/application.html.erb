@@ -12,10 +12,11 @@
   <body>
 
       <% if user_signed_in? %>
-      <p>Hello, <%= link_to "#{current_user.name}" %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>      
-      <%= link_to "Dashboard", dashboard_path %>
+      <p>Hello, <%= link_to "#{current_user.name}", user_path(current_user.name) %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
+      <% if !current_page?(dashboard_path) %>
+        <%= link_to "Dashboard", dashboard_path %>
+      <% end %>
       <br>
-
       <% end %>
   
   <%= yield %>
