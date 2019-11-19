@@ -33,8 +33,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   
-  resources :charges, only: [:new, :create, :show]
-  get 'charges/checkout'
+  resources :charges, only: [:new, :create, :show] do
+    collection do
+      get 'checkout'
+    end
+  end
   
+  
+
 
 end

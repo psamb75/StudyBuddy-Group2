@@ -14,6 +14,9 @@ class ChargesController < ApplicationController
       @charges = Stripe::Charge.list(customer: current_user.stripe_id)
     end
 
+    def checkout
+    end
+
     private
   
     def charges_params
