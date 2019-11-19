@@ -10,6 +10,16 @@
   </p>
 
   <p>
+    <%= form.label :hours %><br>
+    <%= form.number_field :hours %>
+  </p>
+
+  <p>
+    <%= form.label :date %><br>
+    <%= form.datetime_select :date %>
+  </p>
+
+  <p>
     <%= form.submit %>
   </p>
 <% end %>

@@ -38,8 +38,5 @@ Rails.application.routes.draw do
       get 'checkout'
     end
   end
-  
-  
-
 
 end

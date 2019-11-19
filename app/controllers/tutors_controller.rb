@@ -33,6 +33,6 @@ class TutorsController < ApplicationController
 
     private
     def tutors_params
-      params.require(:tutor).permit(:description, :rate)
+      params.require(:tutor).permit(:description, :rate, :hours, :date)
     end
 end

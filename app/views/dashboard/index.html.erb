@@ -24,17 +24,16 @@
 <table style="border:1px solid black;">
     <thead>
         <th>Course</th> 
-        <th>With</th>
+        <th>Tutor</th>
         <th></th>
     </thead>
     <tbody>
     <!-- for each tutoring session events, display details -->
         <% @my_tutoring_sessions.each do |tutoring_session| %>
                 <% course = Course.find_by(course_code: tutoring_session.course_code) %>
-                <% tutor = Tutor.find_by(user_name: tutoring_session.tutor_name) %>
             <tr>
-                <td><%= link_to "#{tutoring_session.course_code}", course %></td> <!-- Link to tutoring page-->
-                <td><%= link_to "#{tutoring_session.tutor_name}", controller: "tutors", action: "show", course_id: course.id, id: tutor.id  %></td>
+                <td><%= link_to "#{course.course_name}", course %></td> <!-- Link to tutoring page-->
+                <td><%= link_to "#{tutoring_session.tutor_name}", controller: "tutors", action: "show", course_id: course.id, id: tutoring_session.tutor_id  %></td>
             </tr>
         <% end %>
     </tbody>
