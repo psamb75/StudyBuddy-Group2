@@ -29,7 +29,7 @@
   <%= @tutor.hours * @tutor.rate %>
 </p>
 
-<% if (TutoringSession.exists?(user_id: current_user.id)) %>
+<% if (TutoringSession.exists?(user_id: current_user.id, tutor_id: @tutor.id)) %>
   <p>You have already paid for the session!</p>
 <% elsif (!TutoringSession.exists?(tutor_id: @tutor.id)) %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
