@@ -1,0 +1,11 @@
+ <table> 
+  <% @charges.each do |charge| %>
+    <tr>
+      <td><%= charge.amount %></td>
+      <td><%= charge.billing_details %></td>
+      <td><%= charge.id %></td>
+      <td>
+      </td>
+    </tr>
+  <% end %>
+</table>
