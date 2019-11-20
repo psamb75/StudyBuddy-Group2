@@ -1,3 +1,11 @@
+<% [:notice].each do |key| %> 
+  <%   if flash[key] %> 
+    <div class="<%= key %>" id="flash"> 
+      <%= flash[key] %> 
+    </div> 
+  <% end %> 
+<% end %>
+
 <p>
   <strong>Course Code:</strong>
   <%= @course.course_code %>
@@ -15,4 +23,7 @@
 </div>
 <div>
   <%= link_to 'Study Groups', :action=>"index", :controller=>"study_groups", :course_id => @course.id %>
+</div>
+<div>
+  <%= link_to 'Course Listing', :action=>"index", :controller=>"courses"%>
 </div>

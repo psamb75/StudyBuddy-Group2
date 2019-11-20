@@ -1,3 +1,12 @@
+<% [:error].each do |key| %> 
+  <%   if flash[key] %> 
+    <div class="<%= key %>" id="flash"> 
+      <%= flash[key] %> 
+    </div> 
+  <% end %> 
+<% end %>
+
+
 <%= form_with scope: :course, url: courses_path, local: true do |form| %>
   <p>
     <%= form.label :course_code %><br>
@@ -6,7 +15,7 @@
  
   <p>
     <%= form.label :course_name %><br>
-    <%= form.text_field :course_name %>
+    <%= form.text_field :course_name%>
   </p>
  
   <p>

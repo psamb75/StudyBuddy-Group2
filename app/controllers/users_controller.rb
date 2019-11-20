@@ -15,12 +15,17 @@ class UsersController < ApplicationController
         phone_num_ = params[:user][:phone_num]
         description_ = params[:user][:description]
         @user = current_user
-        @user.update_attribute(:last_name, last_name_)
-        @user.update_attribute(:first_name, first_name_)
-        @user.update_attribute(:phone_num, phone_num_)
-        @user.update_attribute(:description, description_)
-        
-        @my_courses = @user.enrolments
-        render 'show'
+        @user.last_name = last_name_
+        @user.first_name = first_name_
+        @user.phone_num = phone_num_
+        @user.description = description_
+        if @user.save
+            flash[:notice] = "Successfully update your information !"
+            @my_courses = @user.enrolments
+            render 'show'
+        else
+            flash[:error] = "Error: The course has been already added"
+            render 'edit'
+        end
     end
 end

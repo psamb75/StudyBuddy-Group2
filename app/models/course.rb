@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
+    validates :course_code, presence: true, uniqueness: true
+    validates :course_name, presence: true
     has_many :notes
     has_many :study_groups
     has_many :tutors

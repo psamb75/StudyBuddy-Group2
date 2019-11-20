@@ -1,10 +1,6 @@
 class CoursesController < ApplicationController
     def index
-        if params[:search].blank?
-            @courses = Course.all
-        else
-            @courses = Course.search(params[:search])
-        end
+        @courses = Course.all
     end
 
     def show
@@ -17,8 +13,19 @@ class CoursesController < ApplicationController
     def create
         @course = Course.new(course_params)
 
-        @course.save
-        redirect_to @course
+        if @course.save
+            flash[:notice] = "Successfully add a new course !"
+            redirect_to @course
+        else
+            if course_params[:course_code] == ""
+                flash[:error] = "Error: The course code can not be empty"
+            elsif course_params[:course_name] == ""
+                flash[:error] = "Error: The course name can not be empty"
+            else
+                flash[:error] = "Error: The course has already ben added"
+            end
+            render 'new'
+        end
     end
 
     def add
@@ -44,3 +51,4 @@ class CoursesController < ApplicationController
             params.require(:course).permit(:course_code, :course_name)
         end
 end
+
