@@ -9,14 +9,30 @@
 <h1>Change Personal information</h1>
 
 
-<%= form_with scope: :user, url: users_path, local: true do |form| %>
-    <p>
-        <lable for="cover_pic">Upload Cover Picture: </label>
-        <input type="file" name="filename">
-    </p>
+<%= form_with model: @user, local: true do |form| %>
     <p>
       <%= form.label :Name %>
-      <%= form.text_field :name %>
+      <%= form.text_field :name, :disabled=>true%>
+    </p>
+
+    <p>
+      <%= form.label :Email %>
+      <%= form.text_field :email, :disabled=>true%>
+    </p>
+
+    <p>
+      <%= form.label :Lastname %>
+      <%= form.text_field :last_name %>
+    </p>
+
+    <p>
+      <%= form.label :Firstname %>
+      <%= form.text_field :first_name %>
+    </p>
+
+    <p>
+      <%= form.label :Phone %>
+      <%= form.text_field :phone_num %>
     </p>
    
     <p>
@@ -24,21 +40,6 @@
       <%= form.text_field :description %>
     </p>
 
-    <p>
-        <lable for="password"> Current Password </label>
-        <input type="password" name=""id="current_password">
-    </p>
-
-    <p>
-        <lable for="password"> New Password </label>
-       <input type="password" name="" id="new_password">
-    </p>
-    
-    <p>
-        <lable for="password"> Comfirm New Password</label>
-       <input type="password" name="" id="confimed_password">
-    </p>
-   
     <p>
       <%= form.submit "Submit Changes"%> 
       <input type="reset" value="Reset">

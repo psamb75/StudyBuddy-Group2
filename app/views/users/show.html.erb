@@ -9,7 +9,7 @@ padding:5px;
 #personal_info {
 background-color:#eeeeeeee;
 color:black;
-line-height:30px;
+line-height:15px;
 height:300px;
 width:400px;
 float:left;
@@ -44,9 +44,12 @@ padding:5px;
 </p>
 
 
-<p>Name:  <%= @me.name %> </p>
-<p>Description: <%= @me.description %> </p>
-<p>Email Address:  <%= @me.email %>  </p>
+<p>Name:  <%= @user.name %> </p>
+<p>Last Name:  <%= @user.last_name %> </p>
+<p>First Name:  <%= @user.first_name %> </p>
+<p>Phone:  <%= @user.phone_num %> </p>
+<p>Description: <%= @user.description %> </p>
+<p>Email Address:  <%= @user.email %>  </p>
 
 <button type="button">
 <%= link_to 'Edit', edit_user_path(params[:id]) %>
@@ -55,10 +58,24 @@ padding:5px;
 </div>
 
 <div id="class_section">
-<h1>    Enrolled classes</h1>
-    <a href="https://www.google.com/search?q=ECE+444+UofT" target="_blank">
-ECE 444: Software Engineering
-    </a>
+<table style="border:1px solid black;">
+<thead>
+    <th>Enrolled Course Name</th>
+    <th>Enrolled Course code</th>
+    <th></th>
+</thead>
+<tbody>
+<!-- for each enrolled course, display details -->
+    <% @my_courses.each do |c| %>
+        <% x = Course.find(c.course_id) %>
+        <tr>
+            <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
+            <td><%= x.course_code %></td>
+            <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>
 </div>
 
 <div id="footer">
