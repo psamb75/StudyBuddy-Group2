@@ -1,3 +1,4 @@
+<!--
 <style>
 #header {
 background-color:white;
@@ -30,7 +31,7 @@ padding:5px;
 }
 
 </style>
-
+-->
 
 <body>
 <% [:notice].each do |key| %> 
@@ -41,53 +42,70 @@ padding:5px;
     <% end %> 
 <% end %>
 
-
-<div id="header">
-<h1>User Profile</h1>
-</div>
-
-<div id="personal_info">
-<p>
-<img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
-</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 bg-light">
+                <div id="personal_info">
+                    <p>
+                    <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
+                    </p>
 
 
-<p>Name:  <%= @user.name %> </p>
-<p>Last Name:  <%= @user.last_name %> </p>
-<p>First Name:  <%= @user.first_name %> </p>
-<p>Phone:  <%= @user.phone_num %> </p>
-<p>Description: <%= @user.description %> </p>
-<p>Email Address:  <%= @user.email %>  </p>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Username: </span>
+                        <span><%= @user.name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Last Name: </span>
+                        <span><%= @user.last_name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">First Name: </span>
+                        <span><%= @user.first_name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Phone: </span>
+                        <span><%= @user.phone_num %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Description: </span>
+                        <span><%= @user.description %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Email Address: </span>
+                        <span><%= @user.email %></span>
+                    </div>
 
-<button type="button">
-<%= link_to 'Edit', edit_user_path(params[:id]) %>
-</button>
+                    <%= link_to 'Edit', edit_user_path(params[:id]), class:"text-body btn btn-outline-primary" %>
 
-</div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="header">
+                    <h1>User Profile</h1>
+                </div>
 
-<div id="class_section">
-<table style="border:1px solid black;">
-<thead>
-    <th>Enrolled Course Name</th>
-    <th>Enrolled Course code</th>
-    <th></th>
-</thead>
-<tbody>
-<!-- for each enrolled course, display details -->
-    <% @my_courses.each do |c| %>
-        <% x = Course.find(c.course_id) %>
-        <tr>
-            <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
-            <td><%= x.course_code %></td>
-            <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
-        </tr>
-    <% end %>
-</tbody>
-</table>
-</div>
-
-<div id="footer">
-Group 2
-</div>
-
+                <div id="class_section">
+                    <table class="table">
+                        <thead>
+                            <th>Enrolled Course Name</th>
+                            <th>Enrolled Course code</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        <!-- for each enrolled course, display details -->
+                            <% @my_courses.each do |c| %>
+                                <% x = Course.find(c.course_id) %>
+                                <tr>
+                                    <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
+                                    <td><%= x.course_code %></td>
+                                    <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                                </tr>
+                            <% end %>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>

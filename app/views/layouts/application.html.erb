@@ -10,14 +10,17 @@
   </head>
 
   <body>
-
-      <% if user_signed_in? %>
-      <p>Hello, <%= link_to "#{current_user.name}", user_path(current_user.name) %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></p>
-      <% if !current_page?(dashboard_path) %>
-        <%= link_to "Dashboard", dashboard_path %>
-      <% end %>
-      <br>
-      <% end %>
+      <div class="container-fluid">
+        <div class="jumbotron bg-info">
+          <div style="font-size: 300%" class="cold-sm-12 text-center font-weight-bold">Study Buddy</div>
+          <% if user_signed_in? %>
+            <div class="text-left font-weight-bold text-body">Hello, <%= link_to "#{current_user.name}", user_path(current_user.name), class:"text-white" %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete', class:"text-white" %></div>
+            <% if !current_page?(dashboard_path) %>
+              <%= link_to "Go To dashboard", dashboard_path, class:"text-white" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
   
   <%= yield %>
   </body>
