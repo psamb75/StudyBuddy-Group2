@@ -10,6 +10,12 @@ Rails.application.routes.draw do
       collection do
         post 'attend'
       end
+      collection do
+        post 'unattend'
+      end
+      collection do
+        post 'unattend_from_dash'
+      end
     end
     resources :tutors do
       collection do

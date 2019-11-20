@@ -42,6 +42,28 @@ class StudyGroupsController < ApplicationController
     redirect_to :action => "show", :id => study_group_id
   end
 
+  def unattend
+    course_id = params[:course_id]
+    study_group_id = params[:study_group_id]
+    study_group = StudyGroup.find(study_group_id)
+
+    @attendee = Attendee.where(study_group_id: study_group_id, user_id: current_user.id)
+    @attendee.where(study_group_id: study_group_id, user_id: current_user.id).destroy_all
+
+    redirect_to :action => "show", :id => study_group_id
+  end
+
+  def unattend_from_dash
+    course_id = params[:course_id]
+    study_group_id = params[:study_group_id]
+    study_group = StudyGroup.find(study_group_id)
+
+    @attendee = Attendee.where(study_group_id: study_group_id, user_id: current_user.id)
+    @attendee.where(study_group_id: study_group_id, user_id: current_user.id).destroy_all
+
+    redirect_to :controller => "dashboard", :action => "index"
+  end
+
   private
   def study_group_params
     params.require(:study_group).permit(:event_name, :time, :location, :description)

@@ -51,9 +51,10 @@
         <% @my_study.each do |s| %>
             <% y = StudyGroup.find(s.study_group_id) %>
             <tr>
-                <td><%= y.event_name %></td> <!-- Link to event page-->
+                <td><%= link_to "#{y.event_name}",  controller: "study_groups", action: "show", course_id: y.course_id, id: y.id %></td> <!-- Link to event page-->
                 <td><%= y.location %></td>
                 <td><%= y.description %></td>
+                <td><%= button_to "Unattend", controller: "study_groups", action: "unattend_from_dash", course_id: y.course_id, study_group_id: s.study_group_id %></td>
             </tr>
         <% end %>
     </tbody>

@@ -1,7 +1,11 @@
 class NotesController < ApplicationController
     def index
         @course = Course.find(params[:course_id])
-        @notes = @course.notes
+        if params[:search].blank?
+            @notes = Note.all
+        else
+            @notes = Note.search(params[:search])
+        end
     end
 
     def new

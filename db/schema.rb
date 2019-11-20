@@ -99,10 +99,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_211826) do
     t.bigint "tutor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "confirmed"
-    t.boolean "paid"
-    t.datetime "date"
-    t.float "amount"
     t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
     t.index ["user_id"], name: "index_tutoring_sessions_on_user_id"
   end

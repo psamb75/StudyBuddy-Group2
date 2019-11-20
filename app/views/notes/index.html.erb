@@ -20,3 +20,10 @@
   <% end %>
 
 <%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id } %>
+</table>
+
+<h4>Search by Title</h4>
+<%= form_tag(course_notes_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
