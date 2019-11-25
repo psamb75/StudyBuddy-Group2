@@ -1,4 +1,7 @@
 class Note < ApplicationRecord
+  validates :tag, presence: true
+  validates :file, presence: true
+  validates :title, presence: true
   belongs_to :course
   has_one_attached :file
 

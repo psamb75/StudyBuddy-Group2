@@ -22,8 +22,12 @@ class NotesController < ApplicationController
 
         @note = Note.new(notes_params_tmp)
 
-        @note.save
-        redirect_to :action => "show", :id => @note
+        if @note.save
+            redirect_to :action => "show", :id => @note
+        else
+            flash[:error] = @note.errors.full_messages
+            redirect_to :action => "new", :id => @note
+        end
     end
 
     def show
