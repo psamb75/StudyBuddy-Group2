@@ -26,8 +26,8 @@ class StudyGroupsController < ApplicationController
       flash[:notice] = "Success"
       redirect_to :action => "show", :id => @study_group.id
     else
-      flash[:alert] = "uh oh"
-      redirect_to course_study_groups_path
+      flash[:error] = @study_group.errors.full_messages
+      render 'new'
     end
 
   end

@@ -17,9 +17,13 @@ class TutorsController < ApplicationController
         tutors_params_tmp[:course_id] = course.id
 
         @tutor = Tutor.new(tutors_params_tmp)
-        @tutor.save
-
-        redirect_to :action => "show", :id => @tutor
+        if @tutor.save
+            flash[:notice] = "Success"
+            redirect_to :action => "show", :id => @tutor
+        else
+            flash[:error] = @tutor.errors.full_messages
+            render 'new'
+        end
     end
 
     def hire

@@ -3,7 +3,9 @@
 <% if @user.errors.any? %>
   <ul class="EditUserProfileErrors">
     <% for message_error in @user.errors.full_messages%>
-      <li> <%= message_error%> </li>
+      <div class="alert alert-danger">
+          <li> <%= message_error%> </li>
+      </div>
     <%  end%>
   </ul>
 <%  end%>

@@ -37,7 +37,9 @@ padding:5px;
 <% [:notice].each do |key| %> 
     <%   if flash[key] %> 
       <div class="<%= key %>" id="flash"> 
-        <%= flash[key] %> 
+        <div class="alert alert-success">
+            <%= flash[key] %> 
+        </div>
       </div> 
     <% end %> 
 <% end %>
