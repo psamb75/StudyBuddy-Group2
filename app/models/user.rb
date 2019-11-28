@@ -4,9 +4,10 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   # :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :timeoutable, :timeout_in => 15.minutes 
     validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
-    validates :phone_num, :numericality => true, :allow_blank => true, :length => { :minimum => 9, :maximum => 15 }
+    validates :phone_num, :allow_blank => true, format: {:with => /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "Please enter a valid phone number"}
+
     has_many :enrolments
     has_many :courses
     has_many :attendees

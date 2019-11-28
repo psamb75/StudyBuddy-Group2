@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.text :description
       t.string :first_name
       t.string :last_name
-      t.integer :phone_num
+      t.string :phone_num
 
       t.timestamps
     end
