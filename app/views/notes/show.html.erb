@@ -1,31 +1,43 @@
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
- 
-<p>
-  <strong>Tag</strong>
-  <%= @note.tag %>
-</p>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm 12 col-md-6">
+    <div >
+      <h1>Title - <%= @note.title %></h1>
+      <h2> Tag - <%= @note.tag %></h2>
+    </div>
 
-<p>
-  <strong>Note:</strong>
-  <% if @note.file.attached? %>
-    <iframe src="<%=(url_for(@note.file))%>" width="800" height="680" style="border: none;"> </iframe>
-    <!-- <img src="<%=(url_for(@note.file))%>"> -->
-  <% end %>
-</p>
+    <p>
+      <% if @note.file.attached? %>
+        <iframe src="<%=(url_for(@note.file))%>" width="100%" height="680" style="border: none;"> </iframe>
+        <!-- <img src="<%=(url_for(@note.file))%>"> -->
+      <% end %>
+    </p>
 
-<p>
-  <strong>Uploaded:</strong>
-  <%= @note.timeline %>
-</p>
+    <p>
+      <strong>Uploaded:</strong>
+      <%= @note.timeline %>
+    </p>
 
-<p>
-  <strong>Uploaded By</strong>
-  <%= @note.user_name %>
-</p>
+    <p>
+      <strong>Uploaded By</strong>
+      <%= @note.user_name %>
+    </p>
 
-<div>
-  <%= link_to 'Notes', {:controller => "notes", :action => "index" } %>
-<div>
+    <div>
+      <%= link_to 'Notes', {:controller => "notes", :action => "index" }, class:"btn btn-primary" %>
+    </div>
+  </div>
+  <div id="discussion" class="col-sm-12 col-md-6">
+    <div id="comments">
+      <h2>Comments </h2>
+      <div><%= link_to 'Add A comment', {:controller => "comments", :action => "new", :note_id => @note.id}, class:"btn btn-secondary" %><div>
+      <% @comments.each do |comment| %>
+        <tr>
+           <td><%= comment.user.name %> - </td>
+          <td><%= comment.text %></td>
+        </tr>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

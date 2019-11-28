@@ -23,6 +23,11 @@ Rails.application.routes.draw do
       end
     end
     resources :notes do
+      resources :comments do
+        collection do
+          post 'add'
+        end
+      end
       collection do
         post 'add'
       end

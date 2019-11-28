@@ -12,4 +12,5 @@ class User < ApplicationRecord
     has_many :attendees
     has_many :tutors
     has_many :tutoring_sessions
+    has_many :comments
 end

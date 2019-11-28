@@ -2,7 +2,7 @@ class NotesController < ApplicationController
     def index
         @course = Course.find(params[:course_id])
         if params[:search].blank?
-            @notes = Note.all
+            @notes = @course.notes
         else
             @notes = Note.search(params[:search])
         end
@@ -32,6 +32,7 @@ class NotesController < ApplicationController
 
     def show
         @note = Note.find(params[:id])
+        @comments = @note.comments
     end
 
     private

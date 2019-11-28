@@ -4,6 +4,7 @@ class Note < ApplicationRecord
   validates :title, presence: true
   belongs_to :course
   has_one_attached :file
+  has_many :comments
 
   def self.search(search)
     if search

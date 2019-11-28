@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_211826) do
+ActiveRecord::Schema.define(version: 2019_11_26_011024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 2019_11_19_211826) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["study_group_id"], name: "index_attendees_on_study_group_id"
     t.index ["user_id"], name: "index_attendees_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.integer "parent"
+    t.bigint "user_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["note_id"], name: "index_comments_on_note_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -140,6 +151,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_211826) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendees", "study_groups"
   add_foreign_key "attendees", "users"
+  add_foreign_key "comments", "notes"
+  add_foreign_key "comments", "users"
   add_foreign_key "enrolments", "courses"
   add_foreign_key "enrolments", "users"
   add_foreign_key "notes", "courses"
