@@ -26,6 +26,23 @@ class TutorsController < ApplicationController
         end
     end
 
+    def edit
+        @tutor = Tutor.find(params[:id])
+        @course = Course.find(params[:course_id])
+    end
+
+    def update
+        @tutor = Tutor.find(params[:id])
+ 
+        if @tutor.update(tutors_params)
+            flash[:notice] = "Successfully Updated the Tutor info"
+            redirect_to :action => "show", :id => @tutor
+        else
+            flash[:error] = @tutor.errors.full_messages
+            render 'edit'
+        end
+    end
+
     def hire
         course = Course.find(params[:course_id])
         tutor = Tutor.find(params[:tutor_id])

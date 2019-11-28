@@ -29,7 +29,9 @@
   <%= @tutor.hours * @tutor.rate %>
 </p>
 
-<% if (TutoringSession.exists?(user_id: current_user.id, tutor_id: @tutor.id)) %>
+
+<% if (@tutor.user_id == current_user.id) %>
+<% elsif (TutoringSession.exists?(user_id: current_user.id, tutor_id: @tutor.id)) %>
   <p>You have already paid for the session!</p>
 <% elsif (!TutoringSession.exists?(tutor_id: @tutor.id)) %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -40,6 +42,10 @@
   </script>
 <% end %>
 
+<% end %>
+
+<% if (@tutor.user_id == current_user.id) %>
+  <%= button_to "Edit", { :action => "edit" }, :method => :get %>
 <% end %>
 
 <%= button_to "Return to all tutors", { :action => "index" }, :method => :get %>
