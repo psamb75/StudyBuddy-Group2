@@ -32,7 +32,7 @@
       <h2>Comments </h2>
       <div><%= link_to 'Add A comment', {:controller => "comments", :action => "new", :note_id => @note.id}, class:"btn btn-secondary" %><div>
       <% @comments.each do |comment| %>
-           <%= comment.user.name %> - <%= comment.text %></td><%= link_to "Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><br/>
+           <%= comment.user.name %> - <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to "Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><% end %><br/>
       <% end %> 
     </div>
   </div>
