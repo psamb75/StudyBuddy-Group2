@@ -16,14 +16,23 @@
   <%= @course.course_name %>
 </p>
 
-<div>
-  <%= link_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id } %>
-<div>
-  <%= link_to 'Tutoring', :action=>"index", :controller=>"tutors", :course_id => @course.id %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
+      <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-success btn-lg" %>
+    </div>
+    <div class="col-sm">
+      <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+    </div>
+    <div class="col-sm">
+      <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+    </div>
+    <div class="col-sm">
+      <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+    </div>
+  </div>
 </div>
-<div>
-  <%= link_to 'Study Groups', :action=>"index", :controller=>"study_groups", :course_id => @course.id %>
-</div>
-<div>
-  <%= link_to 'Course Listing', :action=>"index", :controller=>"courses"%>
-</div>
+
+<% if (@course.user_id == current_user.id) %>
+  <%= button_to "Edit", { :action => "edit" }, :method => :get %>
+<% end %>

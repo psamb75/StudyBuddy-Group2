@@ -15,7 +15,9 @@ class CoursesController < ApplicationController
     end
 
     def create
-        @course = Course.new(course_params)
+        course_params_temp = course_params
+        course_params_temp[:user_id] = current_user.id
+        @course = Course.new(course_params_temp)
 
         if @course.save
             flash[:notice] = "Successfully add a new course !"
@@ -29,6 +31,22 @@ class CoursesController < ApplicationController
                 flash[:error] = "Error: The course has already ben added"
             end
             render 'new'
+        end
+    end
+
+    def edit
+        @course = Course.find(params[:id])
+    end
+
+    def update
+        @course = Course.find(params[:id])
+ 
+        if @course.update(course_params)
+            flash[:notice] = "Successfully Updated the Course info"
+            redirect_to :action => "show", :id => @course
+        else
+            flash[:error] = @course.errors.full_messages
+            render 'edit'
         end
     end
 
