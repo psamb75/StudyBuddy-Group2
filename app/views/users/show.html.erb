@@ -48,9 +48,11 @@ padding:5px;
         <div class="row">
             <div class="col-md-4 bg-light">
                 <div id="personal_info">
-                    <p>
-                    <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
-                    </p>
+                    <% if @user.avatar.attached? %>
+                        <img src="<%= url_for(@user.avatar) %>" weight="60" height="60" >
+                    <% else %>
+                        <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
+                    <% end %>
 
 
                     <div class="d-inline d-block">

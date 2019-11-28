@@ -43,7 +43,10 @@
       <%= form.label :Description %>
       <%= form.text_field :description %>
     </p>
-
+    <p>
+      <%= form.label :avatar %><br>
+      <%= form.file_field :avatar %>
+    </p>
     <p>
       <%= form.submit "Submit Changes"%> 
       <button type="button">
