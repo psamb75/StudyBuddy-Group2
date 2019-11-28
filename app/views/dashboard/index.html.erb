@@ -1,6 +1,16 @@
-<h1>Dashboard</h1>
-<p><b>Your courses:</b></p>
-<table style="border:1px solid black;">
+<% [:notice].each do |key| %> 
+    <%   if flash[key] %> 
+      <div class="<%= key %>" id="flash"> 
+        <div class="alert alert-success">
+            <%= flash[key] %> 
+        </div>
+      </div> 
+    <% end %> 
+<% end %>
+
+<h1 class="text-center">Dashboard</h1>
+<h2>Your courses:</h2>
+<table class="table">
     <thead>
         <th>Course Name</th>
         <th>Course code</th>
@@ -13,49 +23,54 @@
             <tr>
                 <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
                 <td><%= x.course_code %></td>
-                <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete, class:"btn"%></td>
             </tr>
         <% end %>
     </tbody>
 </table>
-<%= link_to 'Join a course', courses_path %>
+<%= link_to 'Join a course', courses_path, class:"btn btn-light text-body" %>
+<br><br>
+<div class="row">
+    <div class="col-sm 12 col-md-6">
+        <h2>Your tutoring plans:</h2>
+        <table class="table">
+            <thead>
+                <th>Course</th>
+                <th>Tutor</th>
 
-<p><b>Your tutoring plans:</b></p>
-<table style="border:1px solid black;">
-    <thead>
-        <th>Course</th> 
-        <th>With</th>
-        <th></th>
-    </thead>
-    <tbody>
-    <!-- for each tutoring session events, display details -->
-        <% @my_tutoring_sessions.each do |tutoring_session| %>
-                <% course = Course.find_by(course_code: tutoring_session.course_code) %>
-                <% tutor = Tutor.find_by(user_name: tutoring_session.tutor_name) %>
-            <tr>
-                <td><%= link_to "#{tutoring_session.course_code}", course %></td> <!-- Link to tutoring page-->
-                <td><%= link_to "#{tutoring_session.tutor_name}", controller: "tutors", action: "show", course_id: course.id, id: tutor.id  %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<p><b>Your upcoming Events:</b></p>
-<table style="border:1px solid black;">
-    <thead>
-        <th>Event name</th> 
-        <th>Location</th>
-        <th>Event description</th>
-    </thead>
-    <tbody>
-    <!-- for each attending events, display details -->
-        <% @my_study.each do |s| %>
-            <% y = StudyGroup.find(s.study_group_id) %>
-            <tr>
-                <td><%= y.event_name %></td> <!-- Link to event page-->
-                <td><%= y.location %></td>
-                <td><%= y.description %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+            <!-- for each tutoring session events, display details -->
+                <% @my_tutoring_sessions.each do |tutoring_session| %>
+                        <% course = Course.find_by(course_code: tutoring_session.course_code) %>
+                    <tr>
+                        <td><%= link_to "#{course.course_name}", course %></td> <!-- Link to tutoring page-->
+                        <td><%= link_to "#{tutoring_session.tutor_name}", controller: "tutors", action: "show", course_id: course.id, id: tutoring_session.tutor_id  %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm 12 col-md-6">
+    <h2>Your upcoming Events:</h2>
+        <table class="table">
+            <thead>
+                <th>Event name</th> 
+                <th>Location</th>
+                <th>Event description</th>
+            </thead>
+            <tbody>
+            <!-- for each attending events, display details -->
+                <% @my_study.each do |s| %>
+                    <% y = StudyGroup.find(s.study_group_id) %>
+                    <tr>
+                        <td><%= link_to "#{y.event_name}",  controller: "study_groups", action: "show", course_id: y.course_id, id: y.id %></td> <!-- Link to event page-->
+                        <td><%= y.location %></td>
+                        <td><%= y.description %></td>
+                        <td><%= button_to "Unattend", controller: "study_groups", action: "unattend_from_dash", course_id: y.course_id, study_group_id: s.study_group_id %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -26,8 +26,8 @@ class StudyGroupsController < ApplicationController
       flash[:notice] = "Success"
       redirect_to :action => "show", :id => @study_group.id
     else
-      flash[:alert] = "uh oh"
-      redirect_to course_study_groups_path
+      flash[:error] = @study_group.errors.full_messages
+      render 'new'
     end
 
   end
@@ -40,6 +40,28 @@ class StudyGroupsController < ApplicationController
 
     @attendee.save
     redirect_to :action => "show", :id => study_group_id
+  end
+
+  def unattend
+    course_id = params[:course_id]
+    study_group_id = params[:study_group_id]
+    study_group = StudyGroup.find(study_group_id)
+
+    @attendee = Attendee.where(study_group_id: study_group_id, user_id: current_user.id)
+    @attendee.where(study_group_id: study_group_id, user_id: current_user.id).destroy_all
+
+    redirect_to :action => "show", :id => study_group_id
+  end
+
+  def unattend_from_dash
+    course_id = params[:course_id]
+    study_group_id = params[:study_group_id]
+    study_group = StudyGroup.find(study_group_id)
+
+    @attendee = Attendee.where(study_group_id: study_group_id, user_id: current_user.id)
+    @attendee.where(study_group_id: study_group_id, user_id: current_user.id).destroy_all
+
+    redirect_to :controller => "dashboard", :action => "index"
   end
 
   private

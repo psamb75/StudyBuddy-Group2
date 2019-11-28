@@ -1,0 +1,16 @@
+<%= form_with scope: :comment, url: course_note_comments_path, local: true do |form| %>
+    <h1>Add a new comment to <%= @note.title %> </h1>
+    <p>
+        <%= form.label :Text %><br>
+        <%= form.text_area :text %>
+    </p>
+
+    <p>
+        <%= form.submit %>
+    </p>
+
+    <div>
+      <%= link_to 'Back to Note', course_note_path(@course,@note), class:"btn btn-primary" %>
+    </div>
+
+<% end %>

@@ -17,9 +17,30 @@ class TutorsController < ApplicationController
         tutors_params_tmp[:course_id] = course.id
 
         @tutor = Tutor.new(tutors_params_tmp)
-        @tutor.save
+        if @tutor.save
+            flash[:notice] = "Success"
+            redirect_to :action => "show", :id => @tutor
+        else
+            flash[:error] = @tutor.errors.full_messages
+            render 'new'
+        end
+    end
 
-        redirect_to :action => "show", :id => @tutor
+    def edit
+        @tutor = Tutor.find(params[:id])
+        @course = Course.find(params[:course_id])
+    end
+
+    def update
+        @tutor = Tutor.find(params[:id])
+ 
+        if @tutor.update(tutors_params)
+            flash[:notice] = "Successfully Updated the Tutor info"
+            redirect_to :action => "show", :id => @tutor
+        else
+            flash[:error] = @tutor.errors.full_messages
+            render 'edit'
+        end
     end
 
     def hire
@@ -33,6 +54,6 @@ class TutorsController < ApplicationController
 
     private
     def tutors_params
-      params.require(:tutor).permit(:description, :rate)
+      params.require(:tutor).permit(:description, :rate, :hours, :date)
     end
 end

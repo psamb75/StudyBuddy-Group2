@@ -1,24 +1,32 @@
-<h1>Listing Courses</h1>
- 
-<table>
-  <tr>
-    <th>Course Code</th>
-    <th>Course Name</th>
-    <th></th>
-  </tr>
- 
-  <% @courses.each do |course| %>
-    <tr>
-      <td><%= course.course_code %></td>
-      <td><%= link_to "#{course.course_name}", course_path(course) %></td>
-      <td></td>
-      <td>
-      <% if (!Enrolment.exists?(user_id: current_user.id, course_id: course.id)) %>
-        <%= button_to "Add", { :action => "add", :course_id => course.id}, :method => :post %>
-      <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class='container-fluid'>
+  <h1>Listing Courses</h1>
 
-<%= button_to "Create a new course", { :action => "new" }, :method => :get %>
+  <h2>Search by Course Code</h2>
+  <%= form_tag(courses_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag 'Search', name: nil, class:"btn btn-secondary" %>
+  <% end %>
+  
+  <table>
+    <tr>
+      <th>Course Code</th>
+      <th>Course Name</th>
+      <th></th>
+    </tr>
+  
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.course_code %></td>
+        <td><%= link_to "#{course.course_name}", course_path(course) %></td>
+        <td></td>
+        <td>
+        <% if (!Enrolment.exists?(user_id: current_user.id, course_id: course.id)) %>
+          <%= button_to "Add", { :action => "add", :course_id => course.id}, :method => :post %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= button_to "Create a new course", { :action => "new" }, :method => :get, class:"btn btn-primary" %>
+</div>

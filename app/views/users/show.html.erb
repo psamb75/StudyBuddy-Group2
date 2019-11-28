@@ -1,3 +1,4 @@
+<!--
 <style>
 #header {
 background-color:white;
@@ -9,7 +10,7 @@ padding:5px;
 #personal_info {
 background-color:#eeeeeeee;
 color:black;
-line-height:30px;
+line-height:15px;
 height:300px;
 width:400px;
 float:left;
@@ -30,39 +31,85 @@ padding:5px;
 }
 
 </style>
-
+-->
 
 <body>
+<% [:notice].each do |key| %> 
+    <%   if flash[key] %> 
+      <div class="<%= key %>" id="flash"> 
+        <div class="alert alert-success">
+            <%= flash[key] %> 
+        </div>
+      </div> 
+    <% end %> 
+<% end %>
 
-<div id="header">
-<h1>User Profile</h1>
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 bg-light">
+                <div id="personal_info">
+                    <% if @user.avatar.attached? %>
+                        <img src="<%= url_for(@user.avatar) %>" weight="60" height="60" >
+                    <% else %>
+                        <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
+                    <% end %>
 
-<div id="personal_info">
-<p>
-<img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
-</p>
 
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Username: </span>
+                        <span><%= @user.name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Last Name: </span>
+                        <span><%= @user.last_name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">First Name: </span>
+                        <span><%= @user.first_name %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Phone: </span>
+                        <span><%= @user.phone_num %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Description: </span>
+                        <span><%= @user.description %></span>
+                    </div>
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Email Address: </span>
+                        <span><%= @user.email %></span>
+                    </div>
 
-<p>Name:  <%= @me.name %> </p>
-<p>Description: <%= @me.description %> </p>
-<p>Email Address:  <%= @me.email %>  </p>
+                    <%= link_to 'Edit', edit_user_path(params[:id]), class:"text-body btn btn-outline-primary" %>
 
-<button type="button">
-<%= link_to 'Edit', edit_user_path(params[:id]) %>
-</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="header">
+                    <h1>User Profile</h1>
+                </div>
 
-</div>
-
-<div id="class_section">
-<h1>    Enrolled classes</h1>
-    <a href="https://www.google.com/search?q=ECE+444+UofT" target="_blank">
-ECE 444: Software Engineering
-    </a>
-</div>
-
-<div id="footer">
-Group 2
-</div>
-
+                <div id="class_section">
+                    <table class="table">
+                        <thead>
+                            <th>Enrolled Course Name</th>
+                            <th>Enrolled Course code</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        <!-- for each enrolled course, display details -->
+                            <% @my_courses.each do |c| %>
+                                <% x = Course.find(c.course_id) %>
+                                <tr>
+                                    <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
+                                    <td><%= x.course_code %></td>
+                                    <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                                </tr>
+                            <% end %>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>

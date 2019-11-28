@@ -10,6 +10,12 @@ Rails.application.routes.draw do
       collection do
         post 'attend'
       end
+      collection do
+        post 'unattend'
+      end
+      collection do
+        post 'unattend_from_dash'
+      end
     end
     resources :tutors do
       collection do
@@ -17,8 +23,16 @@ Rails.application.routes.draw do
       end
     end
     resources :notes do
+      resources :comments do
+        collection do
+          post 'add'
+        end
+      end
       collection do
         post 'add'
+      end
+      collection do
+        post 'deleteComment'
       end
     end
     collection do
@@ -38,8 +52,5 @@ Rails.application.routes.draw do
       get 'checkout'
     end
   end
-  
-  
-
 
 end

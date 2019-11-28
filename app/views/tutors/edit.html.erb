@@ -10,7 +10,8 @@
   <% end %> 
 <% end %>
 
-<%= form_with scope: :tutor, url: course_tutors_path, local: true do |form| %>
+<h1> Edit Tutoring Info </h1>
+<%= form_with(model: @tutor, url: [@course, @tutor], local: true) do |form| %>
   <p>
     <%= form.label :description %><br>
     <%= form.text_area :description %>

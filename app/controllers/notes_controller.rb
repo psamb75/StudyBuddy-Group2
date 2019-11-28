@@ -1,7 +1,11 @@
 class NotesController < ApplicationController
     def index
         @course = Course.find(params[:course_id])
-        @notes = @course.notes
+        if params[:search].blank?
+            @notes = @course.notes
+        else
+            @notes = Note.search(params[:search])
+        end
     end
 
     def new
@@ -18,12 +22,24 @@ class NotesController < ApplicationController
 
         @note = Note.new(notes_params_tmp)
 
-        @note.save
-        redirect_to :action => "show", :id => @note
+        if @note.save
+            redirect_to :action => "show", :id => @note
+        else
+            flash[:error] = @note.errors.full_messages
+            redirect_to :action => "new", :id => @note
+        end
     end
 
     def show
         @note = Note.find(params[:id])
+        @comments = @note.comments
+    end
+
+    def deleteComment
+        @note = Note.find(params[:note_id])
+        @comment = Comment.find(params[:comment_id])
+        @comment.destroy
+        redirect_to :action => "show", :id => @note
     end
 
     private
