@@ -35,6 +35,13 @@ class NotesController < ApplicationController
         @comments = @note.comments
     end
 
+    def deleteComment
+        @note = Note.find(params[:note_id])
+        @comment = Comment.find(params[:comment_id])
+        @comment.destroy
+        redirect_to :action => "show", :id => @note
+    end
+
     private
         def notes_params
             params.require(:note).permit(:title, :location, :tag, :file)

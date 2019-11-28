@@ -31,6 +31,9 @@ Rails.application.routes.draw do
       collection do
         post 'add'
       end
+      collection do
+        post 'deleteComment'
+      end
     end
     collection do
       post 'add'
