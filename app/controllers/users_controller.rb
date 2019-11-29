@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     #do we need auth part for it?
     def show
-        @user = current_user
+        @user = User.find(params[:id])
         @my_courses = @user.enrolments
     end
     

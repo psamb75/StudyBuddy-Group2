@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :tutors do
       collection do
         post 'hire'
+        post 'complete'
       end
     end
     resources :notes do

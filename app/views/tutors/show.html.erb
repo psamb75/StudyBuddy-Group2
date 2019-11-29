@@ -5,6 +5,17 @@
 </p>
 
 <p>
+  <strong>Rating:</strong>
+  <%= @rating %>
+  <% @rating.times do %>
+    <span class="fas fa-star" style="color:#d4af37"></span>
+  <% end %>
+  <% (5 - @rating).times do %>
+    <span class="far fa-star"></span>
+  <% end %>
+</p>
+
+<p>
   <strong>Rate:</strong>
   <%= @tutor.rate %>
 </p>
@@ -30,18 +41,17 @@
 </p>
 
 
-<% if (@tutor.user_id == current_user.id) %>
-<% elsif (TutoringSession.exists?(user_id: current_user.id, tutor_id: @tutor.id)) %>
-  <p>You have already paid for the session!</p>
-<% elsif (!TutoringSession.exists?(tutor_id: @tutor.id)) %>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-description="Payment for Tutoring"
-    data-amount="<%= @tutor.hours * @tutor.rate * 100 %>"
-    data-locale="auto">
-  </script>
-<% end %>
-
+  <% if (@tutor.user_id == current_user.id) %>
+  <% elsif (TutoringSession.exists?(user_id: current_user.id, tutor_id: @tutor.id)) %>
+    <p>You have already paid for the session!</p>
+  <% elsif (!TutoringSession.exists?(tutor_id: @tutor.id)) %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-description="Payment for Tutoring"
+      data-amount="<%= @tutor.hours * @tutor.rate * 100 %>"
+      data-locale="auto">
+    </script>
+  <% end %>
 <% end %>
 
 <% if (@tutor.user_id == current_user.id) %>
