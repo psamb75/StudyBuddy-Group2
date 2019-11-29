@@ -68,19 +68,24 @@ padding:5px;
                         <span><%= @user.first_name %></span>
                     </div>
                     <div class="d-inline d-block">
-                        <span class="font-weight-bold">Phone: </span>
-                        <span><%= @user.phone_num %></span>
-                    </div>
-                    <div class="d-inline d-block">
                         <span class="font-weight-bold">Description: </span>
                         <span><%= @user.description %></span>
                     </div>
-                    <div class="d-inline d-block">
-                        <span class="font-weight-bold">Email Address: </span>
-                        <span><%= @user.email %></span>
-                    </div>
+                    <% if (@user.id == current_user.id) %>
+                        <div class="d-inline d-block">
+                            <span class="font-weight-bold">Phone: </span>
+                            <span><%= @user.phone_num %></span>
+                        </div>
 
-                    <%= link_to 'Edit', edit_user_path(params[:id]), class:"text-body btn btn-outline-primary" %>
+                        <div class="d-inline d-block">
+                            <span class="font-weight-bold">Email Address: </span>
+                            <span><%= @user.email %></span>
+                        </div>
+                    <% end %>
+
+                    <% if (@user.id == current_user.id) %>
+                        <%= link_to 'Edit', edit_user_path(params[:id]), class:"text-body btn btn-outline-primary" %>
+                    <% end %>
 
                 </div>
             </div>
@@ -103,7 +108,9 @@ padding:5px;
                                 <tr>
                                     <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
                                     <td><%= x.course_code %></td>
-                                    <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                                    <% if (@user.id == current_user.id) %>
+                                        <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                                    <% end %>
                                 </tr>
                             <% end %>
                     </tbody>
