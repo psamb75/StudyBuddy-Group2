@@ -23,7 +23,7 @@
             <tr>
                 <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
                 <td><%= x.course_code %></td>
-                <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete, class:"btn"%></td>
+                <td><%= button_to "Drop", controller: "courses", action: "delete_enrolment", :id => c.course_id, class:"btn"%></td>
             </tr>
         <% end %>
     </tbody>

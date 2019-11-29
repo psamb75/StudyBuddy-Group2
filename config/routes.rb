@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
     collection do
       post 'add'
+      post 'delete_enrolment'
     end
   end
   

@@ -50,6 +50,21 @@ class CoursesController < ApplicationController
         end
     end
 
+    def destroy
+        course_id = params[:id]
+        course = Course.find_by(id: course_id)
+        course_code = course.course_code
+        course_name = course.course_name
+        
+        if course.destroy
+            flash[:notice] = "Successfully deleted the course with name: #{course_code} and code:  #{course_name}"
+            redirect_to dashboard_path
+        else
+            flash[:error] = @course.errors.full_messages
+            redirect_to :action => "show", :id => course
+        end
+    end
+
     def add
         course_id = params[:course_id]
         course = Course.find(course_id)
@@ -60,7 +75,7 @@ class CoursesController < ApplicationController
         redirect_to dashboard_path
     end
 
-    def destroy
+    def delete_enrolment
         course_id = params[:id]
         enrolment = Enrolment.find_by(user_id: current_user.id, course_id: course_id)
         enrolment.destroy
