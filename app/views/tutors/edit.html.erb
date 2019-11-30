@@ -1,15 +1,3 @@
-<% [:error].each do |key| %> 
-  <%   if flash[key] %> 
-    <div class="<%= key %>" id="flash"> 
-      <% for message_error in flash[key]%>
-          <div class="alert alert-danger">
-          <li> <%= message_error%> </li>
-          </div>
-      <%  end%>
-    </div> 
-  <% end %> 
-<% end %>
-
 <h1> Edit Tutoring Info </h1>
 <%= form_with(model: @tutor, url: [@course, @tutor], local: true) do |form| %>
   <p>

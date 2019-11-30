@@ -23,10 +23,10 @@ class StudyGroupsController < ApplicationController
 
     @study_group.save
     if @study_group.save
-      flash[:notice] = "Success"
+      flash[:notice] = "Successfully add a new Study Group"
       redirect_to :action => "show", :id => @study_group.id
     else
-      flash[:error] = @study_group.errors.full_messages
+      flash.now[:error] = @study_group.errors.full_messages
       render 'new'
     end
 

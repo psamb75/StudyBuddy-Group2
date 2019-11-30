@@ -23,13 +23,7 @@ class CoursesController < ApplicationController
             flash[:notice] = "Successfully add a new course !"
             redirect_to @course
         else
-            if course_params[:course_code] == ""
-                flash[:error] = "Error: The course code can not be empty"
-            elsif course_params[:course_name] == ""
-                flash[:error] = "Error: The course name can not be empty"
-            else
-                flash[:error] = "Error: The course has already ben added"
-            end
+            flash.now[:error] = @course.errors.full_messages
             render 'new'
         end
     end
@@ -45,7 +39,7 @@ class CoursesController < ApplicationController
             flash[:notice] = "Successfully Updated the Course info"
             redirect_to :action => "show", :id => @course
         else
-            flash[:error] = @course.errors.full_messages
+            flash.now[:error] = @course.errors.full_messages
             render 'edit'
         end
     end

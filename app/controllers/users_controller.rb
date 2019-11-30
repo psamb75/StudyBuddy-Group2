@@ -22,11 +22,11 @@ class UsersController < ApplicationController
         @user.description = description_
         @user.avatar.attach(avatar_)
         if @user.save
-            flash[:notice] = "Successfully update your information !"
+            flash.now[:notice] = "Successfully update your information !"
             @my_courses = @user.enrolments
             render 'show'
         else
-            flash[:error] = "Error: The course has been already added"
+            flash.now[:error] = @user.errors.full_messages
             render 'edit'
         end
     end

@@ -1,14 +1,5 @@
 <html>
 <body>
-<% if @user.errors.any? %>
-  <ul class="EditUserProfileErrors">
-    <% for message_error in @user.errors.full_messages%>
-      <div class="alert alert-danger">
-          <li> <%= message_error%> </li>
-      </div>
-    <%  end%>
-  </ul>
-<%  end%>
 
 <h1>Change Personal information</h1>
 

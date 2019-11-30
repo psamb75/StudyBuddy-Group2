@@ -32,10 +32,10 @@ class TutorsController < ApplicationController
 
         @tutor = Tutor.new(tutors_params_tmp)
         if @tutor.save
-            flash[:notice] = "Success"
+            flash[:notice] = "Successfully Become a Tutor"
             redirect_to :action => "show", :id => @tutor
         else
-            flash[:error] = @tutor.errors.full_messages
+            flash.now[:error] = @tutor.errors.full_messages
             render 'new'
         end
     end
