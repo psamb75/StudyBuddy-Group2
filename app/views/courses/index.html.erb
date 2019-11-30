@@ -1,32 +1,35 @@
-<div class='container-fluid'>
-  <h1>Listing Courses</h1>
+<div class='container'>
+  <h1 class="text-center">Listing Courses</h1>
 
-  <h2>Search by Course Code</h2>
-  <%= form_tag(courses_path, method: :get) do %>
-    <%= text_field_tag(:search, params[:search]) %>
-    <%= submit_tag 'Search', name: nil, class:"btn btn-secondary" %>
-  <% end %>
-  
-  <table>
-    <tr>
-      <th>Course Code</th>
-      <th>Course Name</th>
-      <th></th>
-    </tr>
-  
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.course_code %></td>
-        <td><%= link_to "#{course.course_name}", course_path(course) %></td>
-        <td></td>
-        <td>
-        <% if (!Enrolment.exists?(user_id: current_user.id, course_id: course.id)) %>
-          <%= button_to "Add", { :action => "add", :course_id => course.id}, :method => :post %>
-        <% end %>
-        </td>
-      </tr>
+  <div class="text-center">
+    <h2>Search by Course Code</h2>
+    <%= form_tag(courses_path, method: :get) do %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag 'Search', name: nil, class:"btn btn-secondary" %>
     <% end %>
-  </table>
-
-  <%= button_to "Create a new course", { :action => "new" }, :method => :get, class:"btn btn-primary" %>
+  </div>
+  
+  <div class="pt-3 text-center">
+    <table style="font-size: 150%" class="table">
+      <tr>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th></th>
+      </tr>
+    
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= course.course_code %></td>
+          <td><%= link_to "#{course.course_name}", course_path(course) %></td>
+          <td></td>
+          <td>
+          <% if (!Enrolment.exists?(user_id: current_user.id, course_id: course.id)) %>
+            <%= button_to "Add", { :action => "add", :course_id => course.id}, :method => :post %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= button_to "Create a new course", { :action => "new" }, :method => :get, class:"btn btn-primary" %>
+  </div>
 </div>

@@ -1,15 +1,14 @@
-<p>
-  <strong>Course Code:</strong>
-  <%= @course.course_code %>
-</p>
- 
-<p>
-  <strong>Course Name:</strong>
-  <%= @course.course_name %>
-</p>
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container">
+  <div class="text-center">
+      <h1 class="d-inline">Course Code:</h1>
+      <span style="font-size: 200%" class="d-inline"><%= @course.course_code %></span>
+  </div>
+  <div class="text-center"> 
+      <h2 class="d-inline">Course Name:</h2>
+      <span style="font-size: 200%" class="d-inline"><%= @course.course_name %></span>
+  </div>
+  <div class="pt-3 row">
     <div class="col-sm">
       <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-success btn-lg" %>
     </div>
@@ -21,6 +20,20 @@
     </div>
     <div class="col-sm">
       <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+    </div>
+  </div>
+  <div class="pt-3 row">
+    <div class="col-sm">
+      <span>Click here to view/upload notes for this course</span>
+    </div>
+    <div class="col-sm">
+      <span>Click here to book a tutoring session or to become a tutor for this course</span>
+    </div>
+    <div class="col-sm">
+      <span>Click here view, join, and create study groups</span>
+    </div>
+    <div class="col-sm">
+      <span>Click here return to the list of courses</span>
     </div>
   </div>
 </div>

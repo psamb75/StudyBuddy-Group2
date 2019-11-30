@@ -1,16 +1,20 @@
 <%= form_with scope: :course, url: courses_path, local: true do |form| %>
   <div class="text-center">
     <div class="field">
-      <%= form.label :course_code %><br>
+      <h1><%= form.label :course_code %></h1>
       <%= form.text_field :course_code %>
     </div>
   
     <div class="field">
-      <%= form.label :course_name %><br>
+      <h2><%= form.label :course_name %></h2>
       <%= form.text_field :course_name%>
     </div>
-    <div class="action">
-      <%= form.submit %>
+    <div class="pt-3 action">
+      <%= form.submit 'Add course', class:"btn btn-primary" %>
     </div>
+    <div class="pt-3">
+      <%= link_to 'Back to course listing', courses_path, class:"btn btn-primary" %>
+    </div>
+    <span style="font-size: 130%">Adding a course will make it available to all users. People will be able to share notes, create study groups, and more.</span>
   </div>
 <% end %>
