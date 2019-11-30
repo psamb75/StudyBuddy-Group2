@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_154000) do
+ActiveRecord::Schema.define(version: 2019_11_29_225428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2019_11_28_154000) do
     t.index ["course_id"], name: "index_notes_on_course_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.datetime "read_at"
+    t.string "action"
+    t.integer "notifiable_id"
+    t.string "notifiable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "study_groups", force: :cascade do |t|
     t.string "event_name"
     t.string "user_name"
@@ -112,6 +123,8 @@ ActiveRecord::Schema.define(version: 2019_11_28_154000) do
     t.bigint "tutor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "rating"
+    t.boolean "completed", default: false
     t.index ["tutor_id"], name: "index_tutoring_sessions_on_tutor_id"
     t.index ["user_id"], name: "index_tutoring_sessions_on_user_id"
   end
@@ -127,6 +140,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_154000) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "date"
     t.integer "hours"
+    t.boolean "completed", default: false
     t.index ["course_id"], name: "index_tutors_on_course_id"
     t.index ["user_id"], name: "index_tutors_on_user_id"
   end
@@ -145,7 +159,6 @@ ActiveRecord::Schema.define(version: 2019_11_28_154000) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "stripe_id"
     t.string "card_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

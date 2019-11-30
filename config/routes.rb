@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   root 'home#index'
   devise_for :users, controllers: { registrations: "registrations" }
   get 'dashboard/index'
@@ -44,6 +45,11 @@ Rails.application.routes.draw do
   
   resources :users
 
+  resources :notifications, only: [:index] do
+    collection do
+      post 'mark_read'
+    end
+  end
 
   get 'study_groups/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
