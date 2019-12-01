@@ -36,52 +36,67 @@ padding:5px;
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 bg-light">
-                <div id="personal_info">
-                    <% if @user.avatar.attached? %>
-                        <img src="<%= url_for(@user.avatar) %>" weight="60" height="60" >
-                    <% else %>
-                        <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" weight="60" height="60" >
-                    <% end %>
+            <div class="col-md-3 bg-light">
+            <div class="card" style="width: 10; ">
+                <% if @user.avatar.attached? %>
+                    <img src="<%= url_for(@user.avatar) %>" height="400">
+                <% else %>
+                    <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg"  height="300" >
+                <% end %>
+            <div class="card-body">
+              <h5 class="card-title" style="color: #00AA9E;"><%= @user.name %></h5>
+              <p class="card-text">
+              <ul class="list-group list-group-flush">
 
-
-                    <div class="d-inline d-block">
-                        <span class="font-weight-bold">Username: </span>
-                        <span><%= @user.name %></span>
-                    </div>
+                <li class="list-group-item">
                     <div class="d-inline d-block">
                         <span class="font-weight-bold">Last Name: </span>
                         <span><%= @user.last_name %></span>
                     </div>
+                </li>
+
+                <li class="list-group-item">
                     <div class="d-inline d-block">
                         <span class="font-weight-bold">First Name: </span>
                         <span><%= @user.first_name %></span>
                     </div>
-                    <div class="d-inline d-block">
-                        <span class="font-weight-bold">Description: </span>
-                        <span><%= @user.description %></span>
-                    </div>
-                    <% if (@user.id == current_user.id) %>
+                </li>
+
+                <% if (@user.id == current_user.id) %>
+                    <li class="list-group-item">
                         <div class="d-inline d-block">
                             <span class="font-weight-bold">Phone: </span>
                             <span><%= @user.phone_num %></span>
                         </div>
+                    </li>
 
+                    <li class="list-group-item">
                         <div class="d-inline d-block">
                             <span class="font-weight-bold">Email Address: </span>
                             <span><%= @user.email %></span>
                         </div>
-                    <% end %>
+                    </li>
+                <% end %>
 
-                    <% if (@user.id == current_user.id) %>
-                        <%= link_to 'Edit', edit_user_path(params[:id]), class:"text-body btn btn-outline-primary" %>
-                    <% end %>
+                <li class="list-group-item">
+                    <div class="d-inline d-block">
+                        <span class="font-weight-bold">Description: </span>
+                        <span><%= @user.description %></span>
+                    </div>
+                </li>
 
-                </div>
+              </p>
+              <% if (@user.id == current_user.id) %>
+                <%= link_to 'Click here to edit profile', edit_user_path(params[:id]), class:"btn btn-primary" %>
+              <% end %>
+              </ul>
+              
+            </div>
+          </div>
             </div>
             <div class="col-md-8">
                 <div id="header">
-                    <h1>User Profile</h1>
+                    <h1>Profile</h1>
                 </div>
 
                 <div id="class_section">
