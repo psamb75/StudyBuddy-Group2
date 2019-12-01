@@ -4,36 +4,48 @@
     <%= @study_group.event_name %>
   </h1>
 
-  <div>
-    <strong>Attendees:</strong>
-    <% @attendees.each do |user| %>
-      <li>
-        <%= user.user_name %>
-      </li>
-    <% end %>
-  </div>
 
-  <div>
-    <strong>Date:</strong>
-    <%= @study_group.time %>
-  </div>
+      <div>
+        <strong>Date:</strong>
+        <%= @study_group.time %>
+      </div>
 
-  <div>
-    <strong>Location:</strong>
-    <%= @study_group.location %>
-  </div>
+      <div>
+        <strong>Location:</strong>
+        <%= @study_group.location %>
+      </div>
 
-  <div>
-    <strong>Description:</strong>
-    <%= @study_group.description %>
-  </div>
-
-  <% if (!Attendee.exists?(user_name: current_user.name, study_group_id: @study_group.id)) %>
-    <%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
-  <% else %>
-    <%= button_to "Un-Attend", {:action => "unattend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
-  <% end %>
-  <div class="py-3">
-   <%= button_to "Return to all study groups", { :action => "index" }, :method => :get, class:"btn btn-primary" %>
-  </div>
+      <div>
+        <strong>Description:</strong>
+        <%= @study_group.description %>
+      </div>
+      <div class="py-3">
+        <div class="d-inline-block">
+          <% if (!Attendee.exists?(user_name: current_user.name, study_group_id: @study_group.id)) %>
+            <%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
+          <% else %>
+            <%= button_to "Un-Attend", {:action => "unattend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
+          <% end %>
+        </div>
+        <div class="d-inline-block">
+          <%= button_to "Return to all study groups", { :action => "index" }, :method => :get, class:"btn btn-primary" %>
+        </div>
+      </div>
+      <h2>Attendees::</h2>
+        <table class="table">
+            <thead>
+                <th>Username</th> 
+                <th>Name</th>
+            </thead>
+            <tbody>
+            <!-- for each attending events, display details -->
+                <% @attendees.each do |x| %>
+                    <% user = User.find(x.user_id) %>
+                    <tr>
+                        <td><%= link_to "#{user.name}", user_path(user) %></td> <!-- Link to event page-->
+                        <td><%= user.first_name + " " + user.last_name %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
 </div>
