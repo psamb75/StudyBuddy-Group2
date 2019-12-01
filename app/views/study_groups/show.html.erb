@@ -1,35 +1,39 @@
-<p>
-  <strong>Event Name:</strong>
-  <%= @study_group.event_name %>
-</p>
+<div style="font-size:130%" class="container text-center">
+  <h1>
+    <strong>Event Name:</strong>
+    <%= @study_group.event_name %>
+  </h1>
 
-<p>
-  <strong>Attendees:</strong>
-  <% @attendees.each do |user| %>
-    <li>
-      <%= user.user_name %>
-    </li>
+  <div>
+    <strong>Attendees:</strong>
+    <% @attendees.each do |user| %>
+      <li>
+        <%= user.user_name %>
+      </li>
+    <% end %>
+  </div>
+
+  <div>
+    <strong>Date:</strong>
+    <%= @study_group.time %>
+  </div>
+
+  <div>
+    <strong>Location:</strong>
+    <%= @study_group.location %>
+  </div>
+
+  <div>
+    <strong>Description:</strong>
+    <%= @study_group.description %>
+  </div>
+
+  <% if (!Attendee.exists?(user_name: current_user.name, study_group_id: @study_group.id)) %>
+    <%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
+  <% else %>
+    <%= button_to "Un-Attend", {:action => "unattend", :study_group_id => @study_group.id}, :method => :post, class:"btn btn-primary" %>
   <% end %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @study_group.time %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @study_group.location %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @study_group.description %>
-</p>
-
-<% if (!Attendee.exists?(user_name: current_user.name, study_group_id: @study_group.id)) %>
-  <%= button_to "Attend", {:action => "attend", :study_group_id => @study_group.id}, :method => :post %>
-<% else %>
-  <%= button_to "Un-Attend", {:action => "unattend", :study_group_id => @study_group.id}, :method => :post %>
-<% end %>
-<%= button_to "Return to all study groups", { :action => "index" }, :method => :get %>
+  <div class="py-3">
+   <%= button_to "Return to all study groups", { :action => "index" }, :method => :get, class:"btn btn-primary" %>
+  </div>
+</div>

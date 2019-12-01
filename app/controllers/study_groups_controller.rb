@@ -1,7 +1,7 @@
 class StudyGroupsController < ApplicationController
   def index
-    course = Course.find(params[:course_id])
-    @study_groups = course.study_groups
+    @course = Course.find(params[:course_id])
+    @study_groups = @course.study_groups
   end
 
   def show

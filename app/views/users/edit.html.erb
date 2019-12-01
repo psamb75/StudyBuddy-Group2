@@ -1,52 +1,45 @@
-<html>
-<body>
+<div style="font-size:130%" class="container text-center">
+  <h1>Change Personal information</h1>
+  <%= form_with model: @user, local: true do |form| %>
+      <p>
+        <%= form.label :Name %>
+        <%= form.text_field :name, :disabled=>true%>
+      </p>
 
-<h1>Change Personal information</h1>
+      <p>
+        <%= form.label :Email %>
+        <%= form.text_field :email, :disabled=>true%>
+      </p>
 
+      <p>
+        <%= form.label :Lastname %>
+        <%= form.text_field :last_name %>
+      </p>
 
-<%= form_with model: @user, local: true do |form| %>
-    <p>
-      <%= form.label :Name %>
-      <%= form.text_field :name, :disabled=>true%>
-    </p>
+      <p>
+        <%= form.label :Firstname %>
+        <%= form.text_field :first_name %>
+      </p>
 
-    <p>
-      <%= form.label :Email %>
-      <%= form.text_field :email, :disabled=>true%>
-    </p>
-
-    <p>
-      <%= form.label :Lastname %>
-      <%= form.text_field :last_name %>
-    </p>
-
-    <p>
-      <%= form.label :Firstname %>
-      <%= form.text_field :first_name %>
-    </p>
-
-    <p>
-      <%= form.label :Phone %>
-      <%= form.text_field :phone_num %>
-    </p>
-   
-    <p>
-      <%= form.label :Description %>
-      <%= form.text_field :description %>
-    </p>
-    <p>
-      <%= form.label :avatar %><br>
-      <%= form.file_field :avatar %>
-    </p>
-    <p>
-      <%= form.submit "Submit Changes"%> 
-      <button type="button">
-            <%= link_to "Go back to main profile", user_path(params[:id]),data: { confirm: 'Are you sure you want to leave this page? You will lose any unsaved data.?' } %>
-        </button>
-    </p>
+      <p>
+        <%= form.label :Phone %>
+        <%= form.text_field :phone_num %>
+      </p>
     
-  <% end %>
+      <p>
+        <%= form.label :Description %>
+        <%= form.text_field :description %>
+      </p>
+      <p>
+        <%= form.label :avatar %><br>
+        <%= form.file_field :avatar %>
+      </p>
+      <p>
+        <%= form.submit "Submit Changes", class:"btn btn-primary"%> 
+        <%= link_to "Go back to main profile", user_path(params[:id]),data: { confirm: 'Are you sure you want to leave this page? You will lose any unsaved data.?' },class:"btn btn-primary" %>
 
-</body>
+      </p>
+      
+    <% end %>
+  </div>
 
-</html>
