@@ -10,7 +10,7 @@
   </div>
   <div class="pt-3 row">
     <div class="col-sm">
-      <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-success btn-lg" %>
+      <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-primary btn-lg" %>
     </div>
     <div class="col-sm">
       <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
@@ -22,7 +22,7 @@
       <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
     </div>
   </div>
-  <div class="pt-3 row">
+  <div style="font-size:130%" class="pt-3 row">
     <div class="col-sm">
       <span>Click here to view/upload notes for this course</span>
     </div>
