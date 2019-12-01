@@ -61,10 +61,14 @@ class TutorsController < ApplicationController
         course = Course.find(params[:course_id])
         tutor = Tutor.find(params[:tutor_id])
         @tutoringSession = TutoringSession.new(tutor_name: tutor.user_name, student_name: current_user.name, course_code: course.course_code, user_id:current_user.id, tutor_id: tutor.id)
+        charge_info = { :stripeEmail => params[:stripeEmail],
+                        :stripeToken => params[:stripeToken],
+                        :amount => tutor.hours * tutor.rate * 100,
+                        :description => "User #{current_user.name} has paid you for tutoring service in #{course.course_name}" }
 
         if @tutoringSession.save
             flash[:notice] = "Successfully paid for the Tutoring service"
-            redirect_to :controller => "dashboard", :action => "index"
+            redirect_to :controller => "charges", :action => "checkout", :charge_info => charge_info
         else
             flash[:error] = @tutoring_session.errors.full_messages
             redirect_to :action => "show", :id => @tutor
