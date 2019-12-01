@@ -1,5 +1,16 @@
 <%= form_with scope: :comment, url: course_note_comments_path, local: true do |form| %>
-    <h1>Add a new comment to <%= @note.title %> </h1>
+    
+    <%= form.hidden_field :ancestry, :value => @ancestry %>
+    <%= form.hidden_field :ind, :value => @ind %>
+    
+    
+    <% if @ancestry == "0" %>
+        <h1>Add a new comment to <%= @note.title %> </h1>
+    <% else %>
+        <h2>Reply to " <%= Comment.find(params[:ancestry]).text %> "</h2>
+    <% end %>
+    
+    
     <p>
         <%= form.label :Text %><br>
         <%= form.text_area :text %>

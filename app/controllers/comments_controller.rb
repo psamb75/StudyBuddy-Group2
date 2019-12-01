@@ -2,6 +2,9 @@ class CommentsController < ApplicationController
   def new
     @note = Note.find(params[:note_id])
     @course = Course.find(params[:course_id])
+    @ancestry = params[:ancestry]
+    @ind = params[:ind]
+    puts :ind
   end
 
   def create
@@ -9,7 +12,7 @@ class CommentsController < ApplicationController
     comments_params_temp = comments_params
     comments_params_temp[:note_id] = @note.id
     comments_params_temp[:user_id] = current_user.id
-
+    
     @comment = Comment.new(comments_params_temp)
 
         if @comment.save
@@ -31,6 +34,6 @@ class CommentsController < ApplicationController
 
   private
         def comments_params
-            params.require(:comment).permit(:text)
+            params.require(:comment).permit(:text, :ancestry, :ind)
         end
 end
