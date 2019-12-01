@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-    validates :course_code, presence: true, uniqueness: true
+    validates :course_code, presence: true, uniqueness: true, format: { without: /\s/,  message: "can not have space"  },  length: { maximum: 7 }
     validates :course_name, presence: true
     has_many :notes
     has_many :study_groups
