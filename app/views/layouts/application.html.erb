@@ -21,12 +21,12 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active mr-1">
+          <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
-              <div class="text-left font-weight-bold text-body">Hello, <%= current_user.name %></div>
+              <div class="text-left font-weight-bold">Hello, <%= current_user.name %></div>
             <% end %>
           </li>
-          <li class="nav-item active mr-1">
+          <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
               <% if !current_page?(dashboard_path) %>
                 <%= link_to "Go To dashboard", dashboard_path, class:"btn btn-light" %>
@@ -34,19 +34,15 @@
             <% end %>
           </li>
           
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle bg-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <% if user_signed_in? %>
-                <%= link_to "Profile", user_path(current_user.id), class:"dropdown-item" %>
-                <%= link_to "Sign out", destroy_user_session_path, :method => 'delete', class:"dropdown-item" %>
-              <% end %>
-            </div>
+          <li class="nav-item active mr-1 mb-1">
+            <% if user_signed_in? %>
+                <%= link_to "Profile", user_path(current_user.id), class:"btn btn-light" %>
+            <% end %>
+          </li>
+          <li class="pull-right nav-item active mr-1 mb-1">
+            <% if user_signed_in? %>
+                <%= link_to "Sign out", destroy_user_session_path, :method => 'delete', class:"btn btn-light" %>
+            <% end %>
           </li>
         </ul>
       </div>

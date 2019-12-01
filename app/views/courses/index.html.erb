@@ -1,4 +1,4 @@
-<div class='container'>
+<div style="font-size:130%" class='container'>
   <h1 class="text-center">Listing Courses</h1>
 
   <div class="text-center">
@@ -10,7 +10,8 @@
   </div>
   
   <div class="pt-3 text-center">
-    <table style="font-size: 150%" class="table">
+    <div class="table-responsive">
+    <table class="table">
       <tr>
         <th>Course Code</th>
         <th>Course Name</th>
@@ -30,6 +31,7 @@
         </tr>
       <% end %>
     </table>
+    </div>
     <%= button_to "Create a new course", { :action => "new" }, :method => :get, class:"btn btn-primary" %>
   </div>
 </div>

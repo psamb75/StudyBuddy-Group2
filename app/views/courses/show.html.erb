@@ -1,5 +1,5 @@
 
-<div class="container">
+<div style="font-size:130%" class="container">
   <div class="text-center">
       <h1 class="d-inline">Course Code:</h1>
       <span style="font-size: 200%" class="d-inline"><%= @course.course_code %></span>
@@ -11,28 +11,18 @@
   <div class="pt-3 row">
     <div class="col-sm">
       <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-primary btn-lg" %>
-    </div>
-    <div class="col-sm">
-      <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-    </div>
-    <div class="col-sm">
-      <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-    </div>
-    <div class="col-sm">
-      <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-    </div>
-  </div>
-  <div style="font-size:130%" class="pt-3 row">
-    <div class="col-sm">
       <span>Click here to view/upload notes for this course</span>
     </div>
     <div class="col-sm">
+      <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
       <span>Click here to book a tutoring session or to become a tutor for this course</span>
     </div>
     <div class="col-sm">
+      <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
       <span>Click here view, join, and create study groups</span>
     </div>
     <div class="col-sm">
+      <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
       <span>Click here return to the list of courses</span>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <div style="font-size:130%" class="container text-center">
   <h1>Listing study groups</h1>
-
+  <div class="table-responsive">
   <table class="table">
     <tr>
       <th>Event Name</th>
@@ -20,6 +20,7 @@
       </tr>
     <% end %>
   </table>
+  </div>
   <div class="pt-3">
    <%= link_to "Create a new study group", { :action => "new" }, class:"btn btn-primary" %>
   </div>
