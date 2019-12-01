@@ -1,22 +1,26 @@
 <%= form_with scope: :note, url: course_notes_path, local: true do |form| %>
-    <h1>Add a new note to <%= @course.course_code %> </h1>
-    <p>
-        <%= form.label :Title %><br>
-        <%= form.text_field :title %>
-    </p>
- 
-    <p>
-      <%= form.label :file %><br>
-      <%= form.file_field :file %>
-    </p>
- 
-   
-    <%= form.radio_button :tag, "personal" %> <%= form.label :Personal %>
-    <%= form.radio_button :tag, "External Resource" %><%= form.label :'External Resource' %>  
-    <%= form.radio_button :tag, "Past Test/Exam" %><%= form.label :'Past Test/Exam' %>
-
-    <p>
-        <%= form.submit %>
-    </p>
-
+    <div style="font-size: 130%" class="container text-center">
+        <h1>Add a new note to <%= @course.course_code %> </h1>
+        <div class="font-weight-bold">
+            <%= form.label :Title %><br>
+            <%= form.text_field :title %>
+        </div>
+    
+        <div class="font-weight-bold">
+        <%= form.label :file %><br>
+        <%= form.file_field :file %>
+        </div>
+    
+        <div class="font-weight-bold">
+            <%= form.radio_button :tag, "personal" %> <%= form.label :Personal %>
+            <%= form.radio_button :tag, "External Resource" %><%= form.label :'External Resource' %>  
+            <%= form.radio_button :tag, "Past Test/Exam" %><%= form.label :'Past Test/Exam' %>
+            <div>
+             <%= form.submit 'Save Note', class:"btn btn-primary" %>
+            </div>
+       </div>
+       <div class="pt-3">
+        <%= link_to "Back to notes", course_notes_path, class:"btn btn-primary" %>
+       </div>
+    </div>
 <% end %>

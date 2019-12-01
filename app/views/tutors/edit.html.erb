@@ -1,26 +1,31 @@
-<h1> Edit Tutoring Info </h1>
-<%= form_with(model: @tutor, url: [@course, @tutor], local: true) do |form| %>
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
+<div style="font-size:130%" class="container text-center">
+  <h1> Edit Tutoring Info </h1>
+  <%= form_with(model: @tutor, url: [@course, @tutor], local: true) do |form| %>
+    <div>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </div>
 
-  <p>
-    <%= form.label :rate %><br>
-    <%= form.number_field :rate %>
-  </p>
+    <div>
+      <%= form.label :rate %><br>
+      <%= form.number_field :rate %>
+    </div>
 
-  <p>
-    <%= form.label :hours %><br>
-    <%= form.number_field :hours %>
-  </p>
+    <div>
+      <%= form.label :hours %><br>
+      <%= form.number_field :hours %>
+    </div>
 
-  <p>
-    <%= form.label :date %><br>
-    <%= form.datetime_select :date %>
-  </p>
+    <div>
+      <%= form.label :date %><br>
+      <%= form.datetime_select :date %>
+    </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+    <div class="py-3">
+      <%= form.submit "Update", class:"btn btn-primary" %>
+    </div>
+    <div>
+      <%= link_to "Back", course_tutor_path(@tutor), class:"btn btn-primary"%>
+    </div>
+  <% end %>
+</div>

@@ -1,29 +1,36 @@
-<h1>
-    Notes for <%= @course.course_name %> - <%= @course.course_code %>
-</h1>
+<div class="container text-center">
+  <h1>
+      Notes for <%= @course.course_name %> - <%= @course.course_code %>
+  </h1>
 
-<table>
-  <tr>
-    <th>Note title</th>
-    <th>Course</th>
-    <th>Tag</th>
-    <th>Access</th>
-  </tr>
-
-  <% @notes.each do |note| %>
-    <tr>
-      <td><%= note.title %></td>
-      <td><%= @course.course_code %></td>
-      <td><%= note.tag %></td>
-      <td><%= link_to 'Show', controller: "notes", action: "show", id: note %></td>
-    </tr>
+  <h4>Search by Title</h4>
+  <%= form_tag(course_notes_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag 'Search', name: nil %>
   <% end %>
+  <br/>
 
-<%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id }, class:"btn btn-primary" %>
-</table>
+  <table class="py-3 table">
+    <tr>
+      <th>Note title</th>
+      <th>Course</th>
+      <th>Tag</th>
+      <th>Access</th>
+    </tr>
 
-<h4>Search by Title</h4>
-<%= form_tag(course_notes_path, method: :get) do %>
-  <%= text_field_tag(:search, params[:search]) %>
-  <%= submit_tag 'Search', name: nil %>
-<% end %>
+    <% @notes.each do |note| %>
+      <tr>
+        <td><%= note.title %></td>
+        <td><%= @course.course_code %></td>
+        <td><%= note.tag %></td>
+        <td><%= link_to 'Show', controller: "notes", action: "show", id: note %></td>
+      </tr>
+    <% end %>
+  </table>
+  <div>
+    <%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id }, class:"btn btn-primary" %>
+  </div>
+  <div class="pt-3">
+  <%= link_to "Back to #{@course.course_code}", course_path(@course), class:"btn btn-primary" %>
+  </div>
+</div>

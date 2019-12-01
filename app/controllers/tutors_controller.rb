@@ -1,7 +1,7 @@
 class TutorsController < ApplicationController
     def index
-        course = Course.find(params[:course_id])
-        @tutors = course.tutors.select{ |s| s.completed == false }
+        @course = Course.find(params[:course_id])
+        @tutors = @course.tutors.select{ |s| s.completed == false }
     end
 
     def show
