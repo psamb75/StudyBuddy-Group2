@@ -33,23 +33,34 @@
       <div><%= link_to 'Add a comment', {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => 0}, class:"btn btn-secondary" %><div>
       <% @comments.each do |comment| %>
            
-           <% comment.ind.times do%>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              
+
+            <% if comment.ind%>
+              <% comment.ind.times do%>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+              <%end%>
             <%end%>
             
 
 
            <b><%=  link_to User.find(comment.user.id).name, controller: "users", action: "show", id: comment.user.id %></b> • <i><%= comment.created_at%></i> <br/>
             
-            <% comment.ind.times do%>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              
-            <%end%>
             
-            <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => (comment.ind+1)} %>
+            
+            <% if comment.ind%>
+              <% comment.ind.times do%>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+              <%end%>
+            <%end%>
+
+            <% if comment.ind%>
+              <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => (comment.ind+1)} %><% end %><br/>
+            <%else %>
+              <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => (0)} %><% end %><br/>
+            <%end%>
            
-           <% end %><br/>
+          
 
 
           
