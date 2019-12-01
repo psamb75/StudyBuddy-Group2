@@ -30,7 +30,7 @@
   <div id="discussion" class="col-sm-12 col-md-6">
     <div id="comments">
       <h2>Comments </h2>
-      <div><%= link_to 'Add a comment', {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => 0}, class:"btn btn-secondary" %><div>
+      <div><%= link_to 'Add a comment', {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => 0, :ind=>0}, class:"btn btn-secondary" %><div>
       <% @comments.each do |comment| %>
            
 
