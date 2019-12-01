@@ -107,26 +107,141 @@ padding:5px;
                 </div>
 
                 <div id="class_section">
-                    <table class="table">
-                        <thead>
-                            <th>Enrolled Course Name</th>
-                            <th>Enrolled Course code</th>
-                            <th></th>
-                        </thead>
-                        <tbody>
-                        <!-- for each enrolled course, display details -->
-                            <% @my_courses.each do |c| %>
-                                <% x = Course.find(c.course_id) %>
-                                <tr>
-                                    <td><%= link_to "#{x.course_name}", x %></td> <!-- Link to course page -->
-                                    <td><%= x.course_code %></td>
-                                    <% if (@user.id == current_user.id) %>
-                                        <td><%= button_to "Drop", course_path(:id => c.course_id), :method => :delete %></td>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="note-tab" data-toggle="tab" href="#note" role="tab" aria-controls="note" aria-selected="false">Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Study Groups</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Tutoring</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment History</a>
+                        </li>
+                    </ul>
+                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <br>
+                            <h2>Courses created by you:</h2>
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Course Name</th>
+                                    <th>Course code</th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @my_courses.each do |c| %>
+                                        <tr>
+                                            <td><%= link_to "#{c.course_name}", c %></td> <!-- Link to course page -->
+                                            <td><%= c.course_code %></td>
+                                        </tr>
                                     <% end %>
-                                </tr>
-                            <% end %>
-                    </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="note" role="tabpanel" aria-labelledby="note-tab">NOTES GO HERE</div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">STUDY GROUPS GO HERE</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <br>
+                            <h4>Active Sessions as Tutor:</h4>
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Course</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @my_active_tutoring_as_tutor.each do |t| %>
+                                        <% c = Course.find(t.course_id) %>
+                                        <tr>
+                                            <td><%= link_to "#{c.course_name} #{c.course_code}", c %></td> <!-- Link to course page -->
+                                            <td><%= link_to "Show session", controller: "tutors", action: "show", course_id: c.id, id: t.id  %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h4>Past Sessions as Tutor:</h4>
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Course</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @my_past_tutoring_as_tutor.each do |t| %>
+                                        <% c = Course.find(t.course_id) %>
+                                        <tr>
+                                            <td><%= link_to "#{c.course_name} #{c.course_code}", c %></td> <!-- Link to course page -->
+                                            <td><%= link_to "Show session", controller: "tutors", action: "show", course_id: c.id, id: t.id  %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h4>Active Sessions as Student:</h4>
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Course</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @my_active_tutoring_as_student.each do |s| %>
+                                        <% t = Tutor.find(s.tutor_id) %>
+                                        <% c = Course.find(t.course_id) %>
+                                        <tr>
+                                            <td><%= link_to "#{c.course_name} #{c.course_code}", c %></td> <!-- Link to course page -->
+                                            <td><%= link_to "Show session", controller: "tutors", action: "show", course_id: c.id, id: t.id  %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h4>Past Sessions as Student:</h4>
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Course</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @my_past_tutoring_as_student.each do |s| %>
+                                        <% t = Tutor.find(s.tutor_id) %>
+                                        <% c = Course.find(t.course_id) %>
+                                        <tr>
+                                            <td><%= link_to "#{c.course_name} #{c.course_code}", c %></td> <!-- Link to course page -->
+                                            <td><%= link_to "Show session", controller: "tutors", action: "show", course_id: c.id, id: t.id  %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                            <table style="font-size: 150%" class="table">
+                                <thead>
+                                    <th>Description</th>
+                                    <th>Time</th>
+                                    <th>Amount</th>
+                                </thead>
+                                <tbody>
+                                <!-- for each enrolled course, display details -->
+                                    <% @payment_history.each do |p| %>
+                                        <tr>
+                                            <td><%= p.description %></td>
+                                            <td><%= Time.at(p.created) %></td>
+                                            <td><%= p.amount %></td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
