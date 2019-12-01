@@ -85,10 +85,17 @@ padding:5px;
                     </div>
                 </li>
 
-              </p>
               <% if (@user.id == current_user.id) %>
-                <%= link_to 'Click here to edit profile', edit_user_path(params[:id]), class:"btn btn-primary" %>
-              <% end %>
+                <li class="list-group-item">
+                    <%= link_to 'Click here to edit profile', edit_user_path(params[:id]), class:"btn btn-primary" %>
+                </li>
+
+                <li class="list-group-item">
+                    <%= link_to 'Change password', edit_user_registration_path(params[:id]), class:"btn btn-primary" %>
+                </li>
+                
+                <% end %>
+                </p>
               </ul>
               
             </div>
