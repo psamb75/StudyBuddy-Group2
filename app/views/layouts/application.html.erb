@@ -23,17 +23,17 @@
         <ul class="navbar-nav mr-auto">
           <li class="navbar-brand">
             <% if user_signed_in? %>
-              <div class="text-left font-weight-bold">Hello, <%= current_user.name %> </div>
-            
-
-            <% else  %>
-              
-              <%= link_to "Log in", new_user_session_path, class:"btn btn-light" %>
-              <%= link_to "Create an account", new_user_registration_path, class:"btn btn-light" %>
-            
+              <div class="text-left font-weight-bold">Hello, <%= current_user.name %></div>
             <% end %>
-
           </li>
+          <% if !user_signed_in? %>
+            <li class="nav-item active mr-1 mb-1">
+              <%= link_to "Log in", new_user_session_path, class:"btn btn-light" %>
+            </li>
+            <li class="nav-item active mr-1 mb-1">
+               <%= link_to "Create an account", new_user_registration_path, class:"btn btn-light" %>
+            </li>
+          <% end %>
           <li class="nav-item active mr-1 mb-1">
           </li>
 

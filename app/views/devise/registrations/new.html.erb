@@ -30,6 +30,11 @@
     </div>
 
     <div class="field">
+      <%= f.label :description %>(A little bit about you)<br />
+      <%= f.text_area :description%>
+    </div>
+
+    <div class="field">
       <%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -41,6 +46,7 @@
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
+
     <br>
     <div class="actions">
       <%= f.submit "Sign up", class:"btn btn-primary"%>
