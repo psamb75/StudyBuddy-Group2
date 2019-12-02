@@ -67,4 +67,6 @@ gem 'bootstrap', '~>4.3.1'
 gem 'bootstrap-sass'
 
 gem 'dotenv-rails'
-gem "high_voltage", "~> 3.1"
+
+gem 'high_voltage', '~>3.1'
+

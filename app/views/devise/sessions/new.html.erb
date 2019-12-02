@@ -1,4 +1,6 @@
-<h1 class="text-center">Log in</h1>
+<h2 class="text-center">Log in</h2>
+
+<h3 class="text-left">Connect with other students</h3>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field text-center font-weight-bold">
@@ -22,5 +24,10 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
+
+    <div class="pt-3">
+      <%= link_to 'See courses', courses_path, class:"btn btn-primary" %>
+    </div>
+
 
 <div class="text-center"><%= render "devise/shared/links" %></div>
