@@ -21,9 +21,9 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active mr-1 mb-1">
+          <li class="navbar-brand">
             <% if user_signed_in? %>
-              <div class="text-left font-weight-bold">Hello, <%= current_user.name %></div>
+              <div class="text-left font-weight-bold">Hello, <%= current_user.name %> </div>
             
 
             <% else  %>
@@ -34,6 +34,9 @@
             <% end %>
 
           </li>
+          <li class="nav-item active mr-1 mb-1">
+          </li>
+
           <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
               <% if !current_page?(dashboard_path) %>

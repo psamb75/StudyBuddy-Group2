@@ -18,7 +18,7 @@ class CourseTest < ActiveSupport::TestCase
     assert_not_nil course.errors[:course_name]
   end
 
-  test 'invalid user with duplicate course code' do
+  test 'invalid with duplicate course code' do
     course_ = Course.new(course_code: 'ECE444', course_name: 'Software Engineering')
     course_.save
     course = Course.new(course_code: 'ECE444', course_name: 'Software Engineering2')

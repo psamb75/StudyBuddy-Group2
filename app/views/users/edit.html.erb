@@ -1,45 +1,94 @@
-<div style="font-size:130%" class="container text-center">
-  <h1>Change Personal information</h1>
+<div class="container-fluid">
+<div class="col-md-5 bg-light">
+<div class="card" style="width: 10; ">
+<div class="card-body">
+<p class="card-text">
+<div style="font-size:120%" class="container text-left">
+  <h1><font size = "5">Change Personal information</font></h1>
+
   <%= form_with model: @user, local: true do |form| %>
+    
+    <li class="list-group-item">
+    <div class="field">
       <p>
         <%= form.label :Name %>
         <%= form.text_field :name, :disabled=>true%>
       </p>
+      </div>
+  </li>
 
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :Email %>
         <%= form.text_field :email, :disabled=>true%>
       </p>
+      </div>
+  </li>
 
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :Lastname %>
         <%= form.text_field :last_name %>
       </p>
+      </div>
+  </li>
 
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :Firstname %>
         <%= form.text_field :first_name %>
       </p>
+      </div>
+  </li>
 
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :Phone %>
         <%= form.text_field :phone_num %>
       </p>
+      </div>
+  </li>
     
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :Description %>
         <%= form.text_area :description %>
       </p>
+      </div>
+  </li>
+
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.label :avatar %><br>
         <%= form.file_field :avatar %>
       </p>
+      </div>
+  </li>
+
+      <li class="list-group-item">
+      <div class="field">
       <p>
         <%= form.submit "Submit Changes", class:"btn btn-primary"%> 
         <%= link_to "Go back to main profile", user_path(params[:id]),data: { confirm: 'Are you sure you want to leave this page? You will lose any unsaved data.?' },class:"btn btn-primary" %>
-
       </p>
+      </div>
+  </li>
       
     <% end %>
   </div>
+
+
+  </p>
+  </div>
+  </div>
+  </div>
+  </div>
+  
+
 

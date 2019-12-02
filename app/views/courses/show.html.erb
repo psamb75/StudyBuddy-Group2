@@ -1,46 +1,48 @@
 
 <div style="font-size:130%" class="container">
+<font size="2">
   <div class="text-center">
-      <h1 class="d-inline">Course Code:</h1>
+      <h1 class="d-inline"><font size ="5">Course Code:</font></h1>
       <span style="font-size: 200%" class="d-inline"><%= @course.course_code %></span>
   </div>
   <div class="text-center"> 
-      <h2 class="d-inline">Course Name:</h2>
+      <h2 class="d-inline"><font size ="5">Course Name:</font></h2>
       <span style="font-size: 200%" class="d-inline"><%= @course.course_name %></span>
   </div>
-  <div class="pt-3 row">
+  </font>
+  <div class="pt-4 row">
     <div class="col-sm">
       <%= button_to 'Notes', {:controller => "notes", :action => "index", :course_id => @course.id }, :method => :get, class:"btn btn-outline-primary btn-lg" %>
-      <span>Click here to view/upload notes for this course</span>
+      <span><font size="3">Click here to view/upload notes for this course</font></span>
     </div>
     <div class="col-sm">
       <%if current_user%>
         <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-        <span>Click here to book a tutoring session or to become a tutor for this course</span>
+        <span><font size="3">Click here to book a tutoring session or to become a tutor for this course</font></span>
       <%end%>
 
       <%if !current_user%>  
         <div><button class="btn btn-outline-secondary btn-lg" type="button" disabled>Tutoring</button></div>
         
-        <span>Log in to book a tutoring session or to become a tutor for this course</span>
+        <span><font size="3">Log in to book a tutoring session or to become a tutor for this course</font></span>
       <%end%>
     </div>
     <div class="col-sm">
       <%if current_user%>
           <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-          <span>Click here view, join, and create study groups</span>
+          <span><font size="3">Click here view, join, and create study groups</font></span>
       <%end%>
 
       <%if !current_user%>  
         <div><button class="btn btn-outline-secondary btn-lg" type="button" disabled>Study Groups</button></div>
         
-        <span>Log in to view, join, and create study groups</span>
+        <span><font size="3">Log in to view, join, and create study groups</font></span>
       <%end%>
     
     </div>
     <div class="col-sm">
       <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-      <span>Click here return to the list of courses</span>
+      <span><font size="3">Click here return to the list of courses</font></span>
     </div>
   </div>
 </div>
