@@ -24,7 +24,15 @@
           <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
               <div class="text-left font-weight-bold">Hello, <%= current_user.name %></div>
+            
+
+            <% else  %>
+              
+              <%= link_to "Log in", new_user_session_path, class:"btn btn-light" %>
+              <%= link_to "Create an account", new_registration_path(resource_name), class:"btn btn-light" %>
+            
             <% end %>
+
           </li>
           <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
