@@ -8,7 +8,8 @@ class Note < ApplicationRecord
 
   def self.search(search)
     if search
-      self.where(title: search)
+      #self.where(title: search)
+      self.where("LOWER(title) LIKE LOWER('%#{search}%')")
     else
       self.all
     end

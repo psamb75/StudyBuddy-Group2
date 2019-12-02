@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  
+  before_action :authenticate_user!, :except => [:index, :show]
+  
   def new
     @note = Note.find(params[:note_id])
     @course = Course.find(params[:course_id])

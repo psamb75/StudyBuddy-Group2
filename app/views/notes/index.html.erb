@@ -28,7 +28,9 @@
     <% end %>
   </table>
   <div>
-    <%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id }, class:"btn btn-primary" %>
+    <%if current_user%>
+      <%= link_to 'Add a new note', {:controller => "notes", :action => "new", :course_id => @course.id }, class:"btn btn-primary" %>
+    <%end%>
   </div>
   <div class="pt-3">
   <%= link_to "Back to #{@course.course_code}", course_path(@course), class:"btn btn-primary" %>

@@ -14,12 +14,29 @@
       <span>Click here to view/upload notes for this course</span>
     </div>
     <div class="col-sm">
-      <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-      <span>Click here to book a tutoring session or to become a tutor for this course</span>
+      <%if current_user%>
+        <%= button_to 'Tutoring', {:action=>"index", :controller=>"tutors", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+        <span>Click here to book a tutoring session or to become a tutor for this course</span>
+      <%end%>
+
+      <%if !current_user%>  
+        <div><button class="btn btn-outline-secondary btn-lg" type="button" disabled>Tutoring</button></div>
+        
+        <span>Log in to book a tutoring session or to become a tutor for this course</span>
+      <%end%>
     </div>
     <div class="col-sm">
-      <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
-      <span>Click here view, join, and create study groups</span>
+      <%if current_user%>
+          <%= button_to 'Study Groups', {:action=>"index", :controller=>"study_groups", :course_id => @course.id}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
+          <span>Click here view, join, and create study groups</span>
+      <%end%>
+
+      <%if !current_user%>  
+        <div><button class="btn btn-outline-secondary btn-lg" type="button" disabled>Study Groups</button></div>
+        
+        <span>Log in to view, join, and create study groups</span>
+      <%end%>
+    
     </div>
     <div class="col-sm">
       <%= button_to 'Course Listing', {:action=>"index", :controller=>"courses"}, :method => :get, class:"btn btn-outline-primary btn-lg"%>
@@ -29,12 +46,17 @@
 </div>
 
 <div class="text-center">
-  <% if (@course.user_id == current_user.id && @course.notes.length == 0 && @course.tutors.length == 0 && @course.study_groups.length == 0) %>
-      <div class="pb-3">
-          <%= button_to "Edit", { :action => "edit" }, :method => :get , class:"btn btn-info"%>
-      </div>
-      <div>
-          <%= button_to "Delete", { :action => "destroy" }, :method => :delete, class:"btn btn-danger" %>
-      </div>
+  
+  <% if current_user%>
+    <% if (@course.user_id == current_user.id && @course.notes.length == 0 && @course.tutors.length == 0 && @course.study_groups.length == 0) %>
+        <div class="pb-3">
+            <%= button_to "Edit", { :action => "edit" }, :method => :get , class:"btn btn-info"%>
+        </div>
+        <div>
+            <%= button_to "Delete", { :action => "destroy" }, :method => :delete, class:"btn btn-danger" %>
+        </div>
+    <% end %>
   <% end %>
+
+
 </div>

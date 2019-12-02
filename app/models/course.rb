@@ -7,7 +7,8 @@ class Course < ApplicationRecord
 
     def self.search(search)
         if search
-            self.where(course_code: search)
+            
+            self.where("LOWER(course_name) LIKE LOWER('%#{search}%') OR course_code LIKE LOWER('%#{search}%')")
         else
             self.all
         end
