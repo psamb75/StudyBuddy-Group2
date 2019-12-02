@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         @user.description = description_
         @user.avatar.attach(avatar_)
         if @user.save
-            flash.now[:notice] = "Successfully update your information !"
+            flash[:notice] = "Successfully update your information !"
             redirect_to :action => 'show', :id => current_user.id
         else
             flash.now[:error] = @user.errors.full_messages
