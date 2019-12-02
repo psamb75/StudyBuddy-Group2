@@ -30,7 +30,16 @@
   <div id="discussion" class="col-sm-12 col-md-6">
     <div id="comments">
       <h2>Comments </h2>
-      <div><%= link_to 'Add a comment', {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => 0, :ind=>0}, class:"btn btn-secondary" %><div>
+      
+      <%if !current_user%>  
+        <div><button class="btn btn-outline-secondary btn-lg" type="button" disabled>Log in to add a comment</button></div>
+
+      <%else%>
+
+        <div><%= link_to 'Add a comment', {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => 0, :ind=>0}, class:"btn btn-secondary" %><div>
+      
+      <%end%>
+
       <% @comments.each do |comment| %>
            
 
@@ -42,9 +51,14 @@
             <%end%>
             
 
+            <%if current_user%>
+              <b><%=  link_to User.find(comment.user.id).name, controller: "users", action: "show", id: comment.user.id %></b> • <i><%= comment.created_at%></i> <br/>
+            <%else%>
+              <b><%=  User.find(comment.user.id).name %></b> • <i><%= comment.created_at%></i> <br/>
 
-           <b><%=  link_to User.find(comment.user.id).name, controller: "users", action: "show", id: comment.user.id %></b> • <i><%= comment.created_at%></i> <br/>
             
+            <%end%>
+
             
             
             <% if comment.ind%>
@@ -61,11 +75,16 @@
             <% end %>
 
             <%= comment.text %>
-            <% if comment.user_id == current_user.id %>
-              <%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %>
-            <% end %>
-            <%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => ind} %>
+            <%if current_user%>
+              <% if comment.user_id == current_user.id %>
+                <%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %>
+              <% end %>
+              <%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => ind} %>
+              
+            <%end%>
             <br/>
+
+
       <% end %> 
     </div>
   </div>
