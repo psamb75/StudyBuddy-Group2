@@ -10,6 +10,12 @@ class StudyGroupsController < ApplicationController
   end
 
   def new
+    @course = Course.find(params[:course_id])
+  end
+
+  def edit
+    @study_group = StudyGroup.find(params[:id])
+    @course = Course.find(params[:course_id])
   end
 
   def create
@@ -19,6 +25,7 @@ class StudyGroupsController < ApplicationController
     study_group_params_1[:user_name] = current_user.name
     study_group_params_1[:course_code] = course.course_code
     study_group_params_1[:course_id] = course_id
+    study_group_params_1[:user_id] = current_user.id
     @study_group = StudyGroup.new(study_group_params_1)
 
     @study_group.save
@@ -30,6 +37,29 @@ class StudyGroupsController < ApplicationController
       render 'new'
     end
 
+  end
+
+  def update
+    @study_group = StudyGroup.find(params[:id])
+
+    if @study_group.update(study_group_params)
+      redirect_to :action => "show", :id => @study_group
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @course = Course.find(params[:course_id])
+    @study_group = StudyGroup.find(params[:id])
+    if @study_group.destroy
+      puts "TEST **"
+    else
+      @study_group.errors.full_messages
+      puts "** FAILED **"
+    end
+
+    redirect_to dashboard_path
   end
 
   def attend
@@ -66,6 +96,6 @@ class StudyGroupsController < ApplicationController
 
   private
   def study_group_params
-    params.require(:study_group).permit(:event_name, :time, :location, :description)
+    params.require(:study_group).permit(:event_name, :date, :location, :description)
   end
 end

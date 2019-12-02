@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_225428) do
+ActiveRecord::Schema.define(version: 2019_12_01_214649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_11_29_225428) do
     t.bigint "note_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "ancestry", default: 0
+    t.integer "ind", default: 0
     t.index ["note_id"], name: "index_comments_on_note_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -88,7 +90,9 @@ ActiveRecord::Schema.define(version: 2019_11_29_225428) do
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["course_id"], name: "index_notes_on_course_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -106,13 +110,15 @@ ActiveRecord::Schema.define(version: 2019_11_29_225428) do
     t.string "event_name"
     t.string "user_name"
     t.string "location"
-    t.string "time"
     t.string "description"
     t.string "course_code"
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.datetime "date"
     t.index ["course_id"], name: "index_study_groups_on_course_id"
+    t.index ["user_id"], name: "index_study_groups_on_user_id"
   end
 
   create_table "tutoring_sessions", force: :cascade do |t|
@@ -173,7 +179,9 @@ ActiveRecord::Schema.define(version: 2019_11_29_225428) do
   add_foreign_key "enrolments", "courses"
   add_foreign_key "enrolments", "users"
   add_foreign_key "notes", "courses"
+  add_foreign_key "notes", "users"
   add_foreign_key "study_groups", "courses"
+  add_foreign_key "study_groups", "users"
   add_foreign_key "tutoring_sessions", "tutors"
   add_foreign_key "tutoring_sessions", "users"
   add_foreign_key "tutors", "courses"

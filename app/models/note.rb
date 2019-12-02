@@ -3,6 +3,7 @@ class Note < ApplicationRecord
   validates :file, presence: true
   validates :title, presence: true
   belongs_to :course
+  belongs_to :user
   has_one_attached :file
   has_many :comments
 

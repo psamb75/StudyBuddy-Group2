@@ -1,0 +1,18 @@
+<h1>Edit note</h1>
+
+<%= form_with(model: @note, url: [@course, @note], local: true) do |form| %>
+  <p>
+    <%= form.label :Title %>
+    <%= form.text_field :title %>
+  </p>
+
+  <%= form.radio_button :tag, "personal" %> <%= form.label :Personal %>
+  <%= form.radio_button :tag, "External Resource" %><%= form.label :'External Resource' %>
+  <%= form.radio_button :tag, "Past Test/Exam" %><%= form.label :'Past Test/Exam' %>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', course_notes_path %>

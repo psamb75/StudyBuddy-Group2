@@ -16,4 +16,6 @@ class User < ApplicationRecord
     has_many :comments
     has_one_attached :avatar
     has_many :notifications, foreign_key: :recipient_id
+    has_many :study_groups
+    has_many :notes
 end

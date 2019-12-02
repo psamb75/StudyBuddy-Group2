@@ -1,0 +1,29 @@
+<h1>Edit study group</h1>
+
+<%= form_with(model: @study_group, url: [@course, @study_group], local: true) do |form| %>
+  <p>
+    <%= form.label :event_name%><br>
+    <%= form.text_field :event_name %>
+  </p>
+
+  <p>
+    <%= form.label :date %><br>
+    <%= form.datetime_select :date %>
+  </p>
+
+  <p>
+    <%= form.label :location %><br>
+    <%= form.text_area :location %>
+  </p>
+
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', course_study_groups_path %>

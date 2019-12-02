@@ -12,12 +12,18 @@ class NotesController < ApplicationController
         @course = Course.find(params[:course_id])
     end
 
+    def edit
+        @note = Note.find(params[:id])
+        @course = Course.find(params[:course_id])
+    end
+
     def create
         course = Course.find(params[:course_id])
         notes_params_tmp = notes_params
         notes_params_tmp[:course_id] = course.id
         notes_params_tmp[:user_name] = current_user.name
         notes_params_tmp[:timeline] = Time.now
+        notes_params_tmp[:user_id] = current_user.id
 
 
         @note = Note.new(notes_params_tmp)
@@ -27,6 +33,16 @@ class NotesController < ApplicationController
         else
             flash[:error] = @note.errors.full_messages
             redirect_to :action => "new", :id => @note
+        end
+    end
+
+    def update
+        @note = Note.find(params[:id])
+
+        if @note.update(notes_params)
+            redirect_to :action => "show", :id => @note
+        else
+            render 'edit'
         end
     end
 
