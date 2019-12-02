@@ -8,17 +8,17 @@ class TutorsController < ApplicationController
         @tutor = Tutor.find(params[:id])
         tutoring_sessions = TutoringSession.where(tutor_name: @tutor.user_name).select{ |t| t.completed == true }
         sum = 0
-        count = 0
+        @count = 0
 
         tutoring_sessions.each do |t|
             sum += t.rating
-            count += 1
+            @count += 1
         end
 
-        if count == 0
+        if @count == 0
             @rating = 0
         else
-            @rating = sum/count
+            @rating = sum.to_f / @count
         end
     end
 

@@ -6,14 +6,15 @@
 </h1>
 
 <p>
-  <strong>Rating:</strong>
+  <strong>Avg Rating:</strong>
   <%= @rating %>
-  <% @rating.times do %>
+  <% @rating.to_i.times do %>
     <span class="fas fa-star" style="color:#d4af37"></span>
   <% end %>
-  <% (5 - @rating).times do %>
+  <% (5 - @rating.to_i).times do %>
     <span class="far fa-star"></span>
   <% end %>
+  (<%= @count %>)
 </p>
 
 <p>

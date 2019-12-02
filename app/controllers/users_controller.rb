@@ -37,7 +37,10 @@ class UsersController < ApplicationController
         @user.first_name = first_name_
         @user.phone_num = phone_num_
         @user.description = description_
-        @user.avatar.attach(avatar_)
+        if avatar_
+            @user.avatar.attach(avatar_)
+        end
+
         if @user.save
             flash[:notice] = "Successfully update your information !"
             redirect_to :action => 'show', :id => current_user.id
