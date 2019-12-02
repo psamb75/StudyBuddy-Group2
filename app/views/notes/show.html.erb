@@ -55,16 +55,17 @@
             <%end%>
 
             <% if comment.ind%>
-              <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => (comment.ind+1)} %><% end %><br/>
-            <%else %>
-              <%= comment.text %><% if comment.user_id == current_user.id %><%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %><%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => (0)} %><% end %><br/>
-            <%end%>
-           
-          
+              <% ind = comment.ind + 1 %>
+            <% else %>
+              <% ind = 0 %>
+            <% end %>
 
-
-          
-
+            <%= comment.text %>
+            <% if comment.user_id == current_user.id %>
+              <%= link_to " Delete", {:action => "deleteComment", :comment_id => comment.id, :note_id => @note.id}, :method => :post %>
+            <% end %>
+            <%= link_to " Reply", {:controller => "comments", :action => "new", :note_id => @note.id, :ancestry => comment.id, :ind => ind} %>
+            <br/>
       <% end %> 
     </div>
   </div>
