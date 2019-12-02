@@ -13,7 +13,12 @@ class UsersController < ApplicationController
         # payment history
         require 'stripe'
         Stripe.api_key = Rails.configuration.stripe[:secret_key]
-        @payment_history = Stripe::Charge.list(customer: current_user.card_token)
+        if current_user.card_token
+            customer = Stripe::Customer.retrieve(current_user.card_token)
+            @payment_history = Stripe::Charge.list(customer: customer)
+        else
+            @payment_history = []
+        end
     end
     
     def edit
@@ -34,8 +39,7 @@ class UsersController < ApplicationController
         @user.avatar.attach(avatar_)
         if @user.save
             flash.now[:notice] = "Successfully update your information !"
-            @my_courses = @user.enrolments
-            render 'show'
+            redirect_to :action => 'show', :id => current_user.id
         else
             flash.now[:error] = @user.errors.full_messages
             render 'edit'
