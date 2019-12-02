@@ -89,9 +89,10 @@
   
   <%= yield %>
   </body>
-   <footer class="navbar fixed-bottom bg-secondary">
-    <div class="text-white">
-      <%= link_to 'About', page_path('about'), class:"text-white" %>
+   <footer class="container-fluid-nav fixed-bottom bg-secondary">
+    <div class="text-white text-center">
+      <%= link_to 'About', page_path('about'), class:"border-rightborder-white text-white" %>&nbsp | &nbsp
+      <%= link_to 'Contact Us', page_path('contact'), class:"text-white" %>
     </div>
   </footer> 
 </html>
