@@ -51,14 +51,17 @@ class StudyGroupsController < ApplicationController
   def destroy
     @course = Course.find(params[:course_id])
     @study_group = StudyGroup.find(params[:id])
+    study_group_id = params[:study_group_id]
+
+    @attendee = Attendee.where(study_group_id: study_group_id)
+    @attendee.where(study_group_id: study_group_id).destroy_all
+
     if @study_group.destroy
-      puts "TEST **"
+      redirect_to :action => "index"
     else
       @study_group.errors.full_messages
-      puts "** FAILED **"
+      redirect_to :action => "show", :id => study_group_id
     end
-
-    redirect_to dashboard_path
   end
 
   def attend

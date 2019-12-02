@@ -4,8 +4,8 @@ class Note < ApplicationRecord
   validates :title, presence: true
   belongs_to :course
   belongs_to :user
-  has_one_attached :file
-  has_many :comments
+  has_one_attached :file, dependent: :delete_all
+  has_many :comments, dependent: :delete_all 
 
   def self.search(search)
     if search

@@ -46,6 +46,19 @@ class NotesController < ApplicationController
         end
     end
 
+    def destroy
+        @course = Course.find(params[:course_id])
+        @note = Note.find(params[:id])
+        note_id = params[:id]
+
+        @comment = Comment.where(note_id: note_id)
+        @comment.where(note_id: note_id).destroy_all
+
+        @note.destroy
+
+        redirect_to :action => "index"
+    end
+
     def show
         @note = Note.find(params[:id])
         @comments = @note.comments

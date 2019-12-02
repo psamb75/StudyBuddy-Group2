@@ -25,6 +25,9 @@
 
     <div>
       <%= link_to 'Notes', {:controller => "notes", :action => "index" }, class:"btn btn-primary" %>
+      <% if @note.user_id == current_user.id %>
+        <%= link_to 'Edit', {controller: "notes", action: "edit", id: @note.id}, class:"btn btn-primary" %>
+      <% end %>
     </div>
   </div>
   <div id="discussion" class="col-sm-12 col-md-6">
@@ -90,3 +93,4 @@
   </div>
 </div>
 </div>
+

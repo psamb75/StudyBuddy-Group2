@@ -30,6 +30,11 @@
         <div class="d-inline-block">
           <%= button_to "Return to all study groups", { :action => "index" }, :method => :get, class:"btn btn-primary" %>
         </div>
+        <div class="d-inline-block">
+          <% if @study_group.user_id == current_user.id %>
+            <%= button_to "Edit", {controller: "study_groups", action: "edit", id: @study_group.id}, :method => :get, class:"btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
       <h2>Attendees:</h2>
         <table class="table">

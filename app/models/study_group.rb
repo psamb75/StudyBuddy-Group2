@@ -5,5 +5,5 @@ class StudyGroup < ApplicationRecord
   validates :description, presence: true
   belongs_to :course
   belongs_to :user
-  has_many :attendees
+  has_many :attendees, dependent: :delete_all
 end
