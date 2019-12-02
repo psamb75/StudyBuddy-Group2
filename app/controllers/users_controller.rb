@@ -9,7 +9,8 @@ class UsersController < ApplicationController
         @my_past_tutoring_as_student = my_tutoring_as_student.select{ |s| s.completed == true }
         @my_active_tutoring_as_tutor = my_tutoring_as_tutor.select{ |s| s.completed == false }
         @my_past_tutoring_as_tutor = my_tutoring_as_tutor.select{ |s| s.completed == true }
-
+        @my_study_groups = @user.study_groups
+        @my_notes = @user.notes
         # payment history
         require 'stripe'
         Stripe.api_key = Rails.configuration.stripe[:secret_key]

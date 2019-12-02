@@ -28,7 +28,6 @@ class StudyGroupsController < ApplicationController
     study_group_params_1[:user_id] = current_user.id
     @study_group = StudyGroup.new(study_group_params_1)
 
-    @study_group.save
     if @study_group.save
       flash[:notice] = "Successfully add a new Study Group"
       redirect_to :action => "show", :id => @study_group.id
