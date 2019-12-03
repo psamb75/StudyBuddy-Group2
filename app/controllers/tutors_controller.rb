@@ -1,4 +1,6 @@
 class TutorsController < ApplicationController
+    before_action :authenticate_user!
+
     def index
         @course = Course.find(params[:course_id])
         @tutors = @course.tutors.select{ |s| s.completed == false }
