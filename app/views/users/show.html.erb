@@ -276,7 +276,7 @@ padding:5px;
                                         <tr>
                                             <td><%= p.description %></td>
                                             <td><%= Time.at(p.created) %></td>
-                                            <td><%= p.amount %></td>
+                                            <td><%= p.amount / 100 %>$</td>
                                         </tr>
                                     <% end %>
                                 </tbody>

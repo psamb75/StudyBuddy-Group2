@@ -64,7 +64,7 @@ class TutorsController < ApplicationController
         charge_info = { :stripeEmail => params[:stripeEmail],
                         :stripeToken => params[:stripeToken],
                         :amount => tutor.hours * tutor.rate * 100,
-                        :description => "User #{current_user.name} has paid you for tutoring service in #{course.course_name}" }
+                        :description => "You have paid user #{tutor.user_name} for tutoring service in #{course.course_name}" }
 
         if @tutoringSession.save
             flash[:notice] = "Successfully paid for the Tutoring service"
