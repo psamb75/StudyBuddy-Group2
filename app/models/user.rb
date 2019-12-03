@@ -5,6 +5,8 @@ class User < ApplicationRecord
   # :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :timeoutable, :timeout_in => 15.minutes 
+    validates :first_name, presence: true, length: { maximum: 25 }
+    validates :last_name, presence: true, length: { maximum: 25 }
     validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
     validates :email, presence: true, format: { :with => /\A(\S+)@(.+)\.(\S+)\z/ } 
     validates :phone_num, :allow_blank => true, format: {:with => /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "Please enter a valid phone number"}
