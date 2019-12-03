@@ -115,6 +115,17 @@
           </div> 
         <% end %> 
       <% end %>
+
+      <% [:alert].each do |key| %> 
+        <%   if flash[key] %> 
+          <div class="<%= key %>" id="flash"> 
+            <div class="alert alert-danger">
+                <%= flash[key] %> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+          </div> 
+        <% end %> 
+    <% end %>
   
   <%= yield %>
   </body>
