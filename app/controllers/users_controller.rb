@@ -11,6 +11,24 @@ class UsersController < ApplicationController
         @my_past_tutoring_as_tutor = my_tutoring_as_tutor.select{ |s| s.completed == true }
         @my_study_groups = @user.study_groups
         @my_notes = @user.notes
+
+        #rating
+        tutoring_sessions = TutoringSession.where(tutor_name: @user.name).select{ |t| t.completed == true }
+        sum = 0
+        @count = 0
+
+        tutoring_sessions.each do |t|
+            sum += t.rating
+            @count += 1
+        end
+
+        if @count == 0
+            @rating = 0
+        else
+            @rating = sum.to_f / @count
+        end
+
+
         # payment history
         require 'stripe'
         Stripe.api_key = Rails.configuration.stripe[:secret_key]

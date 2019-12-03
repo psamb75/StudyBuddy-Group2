@@ -44,7 +44,15 @@ padding:5px;
                     <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg"  height="300" >
                 <% end %>
             <div class="card-body">
-              <h5 class="card-title" style="color: #00AA9E;"><%= @user.name %></h5>
+              <h5 class="card-title" style="color: #00AA9E;"><%= @user.name %> - Tutor Rating: <%= @rating %>
+                    <% @rating.to_i.times do %>
+                        <span class="fas fa-star" style="color:#d4af37"></span>
+                    <% end %>
+                    <% (5 - @rating.to_i).times do %>
+                        <span class="far fa-star"></span>
+                    <% end %>
+                    (<%= @count %>)
+                </h5>
               <p class="card-text">
               <ul class="list-group list-group-flush">
 
