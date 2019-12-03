@@ -22,14 +22,14 @@
      <% if !current_page?(dashboard_path) %>
       <div class="col-4"></div>
       <%else%>
-      <div class="col-5"></div>
+      <div class="col-6"></div>
     <%end%>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="navbar-brand">
             <% if user_signed_in? %>
-              <div class="text-left font-weight-bold">Hello, <%= current_user.name %></div>
+              <div class="text-left font-weight-bold"><%= t('Hello')%>, <%= current_user.name %></div>
             <% end %>
           </li>
           <% if !user_signed_in? %>
@@ -46,22 +46,34 @@
           <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
               <% if !current_page?(dashboard_path) %>
-                <%= link_to "Go To dashboard", dashboard_path, class:"btn btn-light" %>
+                <%= link_to t("Go To dashboard"), dashboard_path, class:"btn btn-light" %>
               <% end %>
             <% end %>
           </li>
           
           <li class="nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
-                <%= link_to "Profile", user_path(current_user.id), class:"btn btn-light" %>
+                <%= link_to t("Profile"), user_path(current_user.id), class:"btn btn-light" %>
             <% end %>
           </li>
           <li class="pull-right nav-item active mr-1 mb-1">
             <% if user_signed_in? %>
-                <%= link_to "Sign out", destroy_user_session_path, :method => 'delete', class:"btn btn-light" %>
+                <%= link_to t("Sign out"), destroy_user_session_path, :method => 'delete', class:"btn btn-light" %>
             <% end %>
           </li>
-        </ul>
+
+          <%if current_user%> 
+            <% if current_page?(user_path(current_user.id)) %>
+              <li class="pull-right nav-item active mr-1 mb-1">
+                <%= link_to "中文版 ", :controller => controller_name, :action => action_name, :locale => "zh-CN"%>
+              </li>
+              <li class="pull-right nav-item active mr-1 mb-1">
+                <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+              </li>
+            <%end%>
+          <%end%>
+
+          </ul>
       </div>
     </nav>
     <!--
@@ -69,7 +81,7 @@
         <div class="jumbotron bg-info">
           <div style="font-size: 300%" class="cold-sm-12 text-center font-weight-bold">Study Buddy</div>
           <% if user_signed_in? %>
-            <div class="text-left font-weight-bold text-body">Hello, <%= link_to "#{current_user.name}", user_path(current_user.name), class:"text-white" %> - <%= link_to "Sign out", destroy_user_session_path, :method => 'delete', class:"text-white" %></div>
+            <div class="text-left font-weight-bold text-body">Hello, <%= link_to "#{current_user.name}", user_path(current_user.name), class:"text-white" %> - <%= link_to t("Sign out"), destroy_user_session_path, :method => 'delete', class:"text-white" %></div>
             <% if !current_page?(dashboard_path) %>
               <%= link_to "Go To dashboard", dashboard_path, class:"text-white" %>
             <% end %>
