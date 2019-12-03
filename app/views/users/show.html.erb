@@ -275,7 +275,7 @@ padding:5px;
                                     <% @payment_history.each do |p| %>
                                         <tr>
                                             <td><%= p.description %></td>
-                                            <td><%= Time.at(p.created) %></td>
+                                            <td><%= Time.at(p.created).localtime %></td>
                                             <td><%= p.amount / 100 %>$</td>
                                         </tr>
                                     <% end %>

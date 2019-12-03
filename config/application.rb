@@ -21,7 +21,7 @@ module StudyBuddy
     # the framework and any gems in your application.
   
     config.time_zone = 'Eastern Time (US & Canada)'
-    #config.active_record.default_timezone = :local 
+    config.active_record.default_timezone = :local 
   
   end
 end

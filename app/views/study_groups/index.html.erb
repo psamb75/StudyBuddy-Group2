@@ -13,7 +13,7 @@
       <% @study_groups.each do |study_group| %>
       <tr>
         <td><%= study_group.event_name %></td>
-        <td><%= study_group.date %></td>
+        <td><%= study_group.date.localtime %></td>
         <td><%= study_group.location %></td>
         <td><%= study_group.description %></td>
         <td><%= link_to 'Show', controller: "study_groups", action: "show", id: study_group %></td>
