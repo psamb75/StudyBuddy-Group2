@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :authenticate_user!
+
     #do we need auth part for it?
     def show
         @user = User.find(params[:id])
